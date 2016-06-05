@@ -1,0 +1,48 @@
+<pages>
+
+   <link>
+      <title>android</title>
+      <url>http://www.tutorialspoint.com/android/index.htm</url>
+   </link>
+
+   <link>
+      <title>Java</title>
+      <url>http://www.tutorialspoint.com/java/index.htm</url>
+   </link>
+
+   <link>
+      <title>Somrat</title>
+      <url>http://www.somrat.info</url>
+   </link>
+
+   <link>
+      <title>CSS </title>
+      <url>http://www.tutorialspoint.com/css/index.htm</url>
+   </link>
+
+   <link>
+      <title>angularjs</title>
+      <url>http://www.tutorialspoint.com/angularjs/index.htm </url>
+   </link>
+
+   <link>
+      <title>hadoop</title>
+      <url>http://www.tutorialspoint.com/hadoop/index.htm </url>
+   </link>
+
+   <link>
+      <title>swift</title>
+      <url>http://www.tutorialspoint.com/swift/index.htm </url>
+   </link>
+
+   <link>
+      <title>ruby</title>
+      <url>http://www.tutorialspoint.com/ruby/index.htm </url>
+   </link>
+
+   <link>
+      <title>nodejs</title>
+      <url>http://www.tutorialspoint.com/nodejs/index.htm </url>
+   </link>
+
+</pages>

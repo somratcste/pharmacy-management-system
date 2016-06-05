@@ -1,0 +1,13 @@
+<?php
+header ("content-type: text/xml");
+include("connection.php");
+$xml='<?xml version="1.0" encoding="UTF-8"?>';
+$qr=mysql_query("SELECT * FROM `f_img` order by id desc") or die(mysql_error());
+$xml.='<userlist>';
+while($res=mysql_fetch_array($qr))
+{
+ $xml.='<user><name>'.$res['name'].'</name><state>'.$res['state'].'</state><country>'.$res['country'].'</country></user>';
+}
+$xml.='</userlist>';
+echo $xml;
+?>
