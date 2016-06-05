@@ -403,17 +403,18 @@ $company_name = $statement3->fetch()["com_name"];
                     
         <tfoot>
            <tr>
-            <th>No.</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Action</th>
-            <th>Cartoon</th>
-            <th>Piece</th>
-            <th>View</th>
-            <th>Edit</th>
-            <th>Delete</th>
-            <th>Action</th>
-          </tr>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Store Box</th>
+              <th>Piece</th>
+              <th>Purchase P.</th>                        
+              <th>Selling P.</th>
+              <th>Expire Date</th>
+              <th>View</th>
+              <th>Edit</th>
+              <th>Delete</th>
+              <th>Action</th>
+            </tr>
         </tfoot>
       </table>
     </div><!-- /.box-body -->

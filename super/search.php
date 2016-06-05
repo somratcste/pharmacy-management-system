@@ -25,8 +25,6 @@ if(isset($_POST['search']))
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     foreach ($result as $row) {
       $com_id = $row['com_id'];
-      $cat_id = $row['cat_id'];
-      $size_id = $row['size_id'];
       $p_id = $row['p_id'];
     }
 
@@ -34,14 +32,6 @@ if(isset($_POST['search']))
     $statement3 = $db->prepare("SELECT * FROM table_companies WHERE com_id = ?");
     $statement3->execute(array($com_id));
     $company_name = $statement3->fetch()["com_name"];
-
-    $statement3 = $db->prepare("SELECT * FROM table_categories WHERE cat_id = ?");
-    $statement3->execute(array($cat_id));
-    $category_name = $statement3->fetch()["cat_name"];
-
-    $statement3 = $db->prepare("SELECT * FROM table_sizes WHERE size_id = ?");
-    $statement3->execute(array($size_id));
-    $size_name = $statement3->fetch()["size_name"];
     
     
     $success_message = "See Your Search Result";
@@ -119,22 +109,23 @@ if(isset($_POST['search']))
 
 
     <div class="row">
-            <div class="col-xs-12">
-              <div class="box">
-                <div align="center" class="box-header with-border">
-                  <h3 class="box-title"><?php echo $company_name; ?> / <?php echo $category_name; ?> / <?php echo $size_name; ?></h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                 <div class="table-responsive">  
-                  <table id="example2" class="table table-bordered table-hover">
+<div class="col-xs-12">
+  <div class="box">
+    <div align="center" class="box-header with-border">
+      <h3 class="box-title"><?php echo $company_name; ?></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+     <div class="table-responsive">  
+      <table id="example2" class="table table-bordered table-hover">
                     <thead>
                       <tr>
                         <th>No.</th>
                         <th>Name</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                        <th>Cartoon</th>
+                        <th>Store Box</th>
                         <th>Piece</th>
+                        <th>Purchase P.</th>                        
+                        <th>Selling P.</th>
+                        <th>Expire Date</th>
                         <th>View</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -146,8 +137,8 @@ if(isset($_POST['search']))
 
           <?php
         $i=0;
-        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? AND cat_id = ? AND size_id = ? AND p_id = ?");
-        $statement->execute(array($com_id,$cat_id,$size_id,$p_id));
+        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? AND p_id = ?");
+        $statement->execute(array($com_id,$p_id));
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach($result as $row)
         {
@@ -157,87 +148,28 @@ if(isset($_POST['search']))
             <tr>
               <td><?php echo $i ; ?></td>
                   <td><?php echo $row['p_name']; ?></td>
-                  <td><?php echo $row['p_price']; ?></td>
-                  <td><a href="" data-toggle="modal" data-target="#price_increment"><img src="../dist/img/price_up.png" alt="" title="" border="0" /></a> || <a href="" data-toggle="modal" data-target="#price_decrement" ><img src="../dist/img/price_down.png" alt="" title="" border="0" /></a> </td>
-
-                  <!--price increment modal -->
-                  <div class="modal fade" id="price_increment" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-                      <div class="modal-dialog">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                  </button>
-                                  <h5 class="modal-title">Increment Price</h5>
-                              </div>
-
-                              <div class="modal-body">
-                                  <!-- The form is placed inside the body of modal -->
-                            <!-- form start -->
-                            <form class="form-horizontal" action="message.php?pid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/form-data">
-                              <div class="box-body">
-                                <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Product Price (Tk.) </label>
-                                  <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_price">
-                                  </div>
-                                </div>
-
-                              </div><!-- /.box-body -->
-                              <div class="box-footer">
-                                
-                                <button type="submit" class="btn btn-info pull-right" name="form_price_increment">UPDATE</button>
-                              </div><!-- /.box-footer -->
-                            </form>
-
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!--price increment modal End-->
-
-                   <!--price decrement modal -->
-                  <div class="modal fade" id="price_decrement" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-                      <div class="modal-dialog">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                  </button>
-                                  <h5 class="modal-title">Decrement Price</h5>
-                              </div>
-
-                              <div class="modal-body">
-                                  <!-- The form is placed inside the body of modal -->
-                            <!-- form start -->
-                            <form class="form-horizontal" action="message.php?pid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/form-data">
-                              <div class="box-body">
-                                <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Product Price (Tk.) </label>
-                                  <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_price">
-                                  </div>
-                                </div>
-
-                              </div><!-- /.box-body -->
-                              <div class="box-footer">
-                                
-                                <button type="submit" class="btn btn-info pull-right" name="form_price_decrement">UPDATE</button>
-                              </div><!-- /.box-footer -->
-                            </form>
-
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <!--price decrement modal End-->
-
-                  <td><?php echo $row['p_cartoon']; ?></td>
+                  <td>
+                    <?php
+                        $statement1 = $db->prepare("SELECT * FROM table_categories WHERE cat_id=?");
+                        $statement1->execute(array($row['cat_id']));
+                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($result1 as $row1)
+                        {
+                          echo $row1['cat_name'];
+                        }
+                      ?>
+                  </td>
                   <td><?php echo $row['p_peice']; ?></td>
-                  <td><img src="../dist/img/view.jpg" data-toggle="modal" data-target="#viewModal<?php echo $i ; ?>"></td>
-
+                  <td><?php echo $row['p_price']; ?></td>
+                  <td><?php echo $row['s_price']; ?></td>
+                  
 
                   
+
+                  <td><?php echo $row['e_date']; ?></td>
+                  
+                  <td><img src="../dist/img/view.jpg" data-toggle="modal" data-target="#viewModal<?php echo $i ; ?>"></td>
+ 
                   <!--product view Modal -->
                   <div class="modal fade" id="viewModal<?php echo $i ; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -247,7 +179,7 @@ if(isset($_POST['search']))
                           <h4 class="modal-title" id="myModalLabel">View Product Details</h4>
                         </div>
                         <div class="modal-body">
-                        <p><b>Product Name <span style="margin-left:4em"></span> :</b> <?php echo $row['p_name'] ; ?> </p>
+                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['p_name'] ; ?> </p>
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php
@@ -261,7 +193,7 @@ if(isset($_POST['search']))
                         ?>
                         </p> 
 
-                        <p><b>Selected Category<span style="margin-left:2.2em"></span> : </b>
+                        <p><b>Selected Store Box<span style="margin-left:2.2em"></span> : </b>
                         <?php
                         $statement1 = $db->prepare("SELECT * FROM table_categories WHERE cat_id=?");
                         $statement1->execute(array($row['cat_id']));
@@ -273,23 +205,12 @@ if(isset($_POST['search']))
                         ?>
                         </p>
 
-                        <p><b>Selected Size<span style="margin-left:4.4em"></span> : </b>
-                        <?php
-                        $statement1 = $db->prepare("SELECT * FROM table_sizes WHERE size_id=?");
-                        $statement1->execute(array($row['size_id']));
-                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
-                        foreach($result1 as $row1)
-                        {
-                          echo $row1['size_name'];
-                        }
-                        ?>
-                        </p>
-
-                        <p><b>Price<span style="margin-left:7.9em"></span> : </b><?php echo $row['p_price']; ?> Tk/-</p>
-                        <p><b>Featured Image</b><img src="../dist/img/product-images/<?php echo $row['p_image']; ?>" alt="" class="img-responsive" width="304" height="236"></p>
-                        <p><b>Cartoon <span style="margin-left:6.7em"></span> : </b><?php echo $row['p_cartoon']; ?></p>
-                        <p><b>Piece <span style="margin-left:7.9em"></span> : </b><?php echo $row['p_peice']; ?></p>
-
+                        <p><b>Piece <span style="margin-left:8em"></span> : </b><?php echo $row['p_peice']; ?></p>
+                        <p><b>Purchase Price<span style="margin-left:3.8em"></span> : </b><?php echo $row['p_price']; ?> Tk/-</p>
+                        <p><b>Selling Price<span style="margin-left:5em"></span> : </b><?php echo $row['s_price']; ?> Tk/-</p>
+                        
+                        <p><b>Expire Date <span style="margin-left:5.4em"></span> : </b><?php echo $row['e_date']; ?></p>
+                      
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -328,7 +249,7 @@ if(isset($_POST['search']))
           <form class="form-horizontal" action="message.php?peditid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Product Code</label>
+                <label for="inputEmail3" class="col-sm-4 control-label">M. Trade Name</label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_name']; ?>" name="p_name">
                 </div>
@@ -365,10 +286,10 @@ if(isset($_POST['search']))
             </div>
 
             <div class="form-group">
-              <label for="inputEmail3" class="col-sm-4 control-label">Select Category</label>
+              <label for="inputEmail3" class="col-sm-4 control-label">Select Store Box</label>
               <div class="col-sm-6">
                 <select class="form-control" name="cat_id">
-                <option value="">Select A Category</option>
+                <option value="">Select A Box</option>
                  <?php
 
                   $statement1 = $db->prepare("SELECT * FROM table_categories");
@@ -394,71 +315,33 @@ if(isset($_POST['search']))
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-4 control-label">Select Size </label>
-              <div class="col-sm-6">
-                <select class="form-control" name="size_id">
-                <option value="">Select A Size</option>
-                <?php
-
-                  $statement1 = $db->prepare("SELECT * FROM table_sizes");
-                  $statement1->execute();
-                  $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
-                  foreach($result1 as $row1)
-                    {
-
-                      if($row1['size_id'] == $row['size_id'])
-                      {
-                        ?><option value="<?php echo $row1['size_id']; ?>" selected><?php echo $row1['size_name']; ?></option><?php
-                      }
-                      else
-                      {
-                        ?><option value="<?php echo $row1['size_id']; ?>"><?php echo $row1['size_name']; ?></option><?php
-                      }
-                        
-                      
-                      
-                    }
-                  ?>
-              </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Previous Image Preview </label>
-                <div class="col-sm-6">
-                  <img src="../dist/img/product-images/<?php echo $row['p_image']; ?>" alt="" class="img-responsive" width="304" height="236">
-                </div>
-              </div>
-
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Upload New Image</label>
-                <div class="col-sm-6">
-                  <input type="file" class="form-control" id="inputEmail3" placeholder="Insert Price" name="p_image">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Price </label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_price']; ?>" name="p_price">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Product Cartoon </label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_cartoon']; ?>" name="p_cartoon">
-                </div>
-              </div>
-
-              <div class="form-group">
+             <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_peice']; ?>" name="p_peice">
                 </div>
               </div>
 
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Purchase Price </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_price']; ?>" name="p_price">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Selling Price </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['s_price']; ?>" name="s_price">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-4 control-label">Expire Date </label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['e_date']; ?>" name="e_date">
+                </div>
+              </div>
 
 
             </div><!-- /.box-body -->
@@ -506,12 +389,7 @@ if(isset($_POST['search']))
                             <form class="form-horizontal" action="message.php?pinid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/formdata">
 
                               <div class="box-body">
-                                <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Product Cartoon </label>
-                                  <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_cartoon_entry">
-                                  </div>
-                                </div> 
+                                
 
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
@@ -521,39 +399,11 @@ if(isset($_POST['search']))
                                 </div> 
 
                                 <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Entry Address </label>
+                                  <label for="inputEmail3" class="col-sm-4 control-label">Memo No.</label>
                                   <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inputEmail3" placeholder="Memo No." name="inc_address">
                                   </div>
-                                </div> 
-
-                                <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-4 control-label">Select Piece Number</label>
-                                <div class="col-sm-6">
-                                  <select  name="carton_number" class="form-control">
-                                        <option value="">Select Piece Number</option>
-                                        <option value="1">Door</option>
-                                        
-
-                                        <?php
-
-                              $statement3 = $db->prepare("SELECT * FROM table_cartons");
-                              $statement3->execute();
-                              $result3 = $statement3->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result3 as $row3) { ?>
-
-
-                                  <option value="<?php echo $row3['c_number']; ?>"><?php echo $row3['c_number'] ; ?></option>
-
-                                  <?php
-                                
-                                  }
-
-                              ?>
-
-                                   </select>
-                                </div>
-                              </div>
+                                </div>                          
 
                               </div><!-- /.box-body -->
                               <div class="box-footer">
@@ -590,12 +440,6 @@ if(isset($_POST['search']))
                             <!-- form start -->
                             <form class="form-horizontal" action="message.php?pdecid=<?php echo $row['p_id']; ?>"  method="post" enctype="multipart/formdata">
                               <div class="box-body">
-                                <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Product Cartoon </label>
-                                  <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_cartoon_entry">
-                                  </div>
-                                </div> 
 
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
@@ -605,39 +449,12 @@ if(isset($_POST['search']))
                                 </div> 
 
                                 <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Entry Address </label>
+                                  <label for="inputEmail3" class="col-sm-4 control-label">Delivary Product</label>
                                   <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inputEmail3" placeholder="Memo No." name="dec_address">
                                   </div>
                                 </div> 
-
-                                <div class="form-group">
-                                <label for="inputEmail3" class="col-sm-4 control-label">Select Piece Number</label>
-                                <div class="col-sm-6">
-                                  <select  name="carton_number" class="form-control">
-                                        <option value="">Select Piece Number</option>
-                                        <option value="1">Door</option>
-                                        
-
-                                        <?php
-
-                              $statement = $db->prepare("SELECT * FROM table_cartons");
-                              $statement->execute();
-                              $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($result as $row) { ?>
-
-
-                                  <option value="<?php echo $row['c_number']; ?>"><?php echo $row['c_number'] ; ?></option>
-
-                                  <?php
-                                
-                                  }
-
-                              ?>
-
-                                   </select>
-                                </div>
-                              </div>
+                      
 
                               </div><!-- /.box-body -->
                               <div class="box-footer">
@@ -665,19 +482,21 @@ if(isset($_POST['search']))
                     
         <tfoot>
            <tr>
-            <th>No.</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Action</th>
-            <th>Cartoon</th>
-            <th>Piece</th>
-            <th>View</th>
-            <th>Edit</th>
-            <th>Delete</th>
-            <th>Action</th>
-          </tr>
+              <th>No.</th>
+              <th>Name</th>
+              <th>Store Box</th>
+              <th>Piece</th>
+              <th>Purchase P.</th>                        
+              <th>Selling P.</th>
+              <th>Expire Date</th>
+              <th>View</th>
+              <th>Edit</th>
+              <th>Delete</th>
+              <th>Action</th>
+            </tr>
         </tfoot>
       </table>
+
     </div><!-- /.box-body -->
     </div>
   </div><!-- /.box -->
