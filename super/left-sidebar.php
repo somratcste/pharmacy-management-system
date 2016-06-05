@@ -46,15 +46,7 @@ foreach ($companies as $com) {
 
   $company = $statement1->fetchAll(PDO::FETCH_ASSOC);
   $company_name=$company[0]["com_name"];
-  
 
-  $statement2 = $db->prepare("SELECT DISTINCT cat_id FROM table_products WHERE com_id = ?");
-  $statement2->execute(array($company_id));
-
-  $categories= $statement2->fetchAll(PDO::FETCH_ASSOC);
-
-  if(count($categories) == 0)
-  {
 ?>
     <li class="treeview">
         <a href="product-details.php?com_id=<?php echo $company_id; ?>">
@@ -62,20 +54,7 @@ foreach ($companies as $com) {
           <i class="fa fa-angle-left pull-right"></i>
         </a>
     </li>
-<?php
-  }
-  else
-  {
-?>
-    <li class="treeview">
-        <a href="product-details.php?com_id=<?php echo $company_id; ?>">
-          <i class="fa fa-gg"></i> <span><?php echo $company_name; ?></span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-  
-    </li>
-<?php
-  }
+<?php 
 }
 ?>
 </ul>
