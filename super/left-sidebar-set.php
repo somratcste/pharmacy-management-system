@@ -48,15 +48,15 @@
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-gg"></i> <span>Category </span>
+          <i class="fa fa-gg"></i> <span>Box</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="category.php"><i class="fa fa-circle-o"></i>Category Section</a></li>
+          <li><a href="category.php"><i class="fa fa-circle-o"></i>Store Box</a></li>
         </ul>
       </li>
 
-      <li class="treeview">
+      <!-- <li class="treeview">
         <a href="#">
           <i class="fa fa-gg"></i> <span>Size</span>
           <i class="fa fa-angle-left pull-right"></i>
@@ -74,7 +74,7 @@
         <ul class="treeview-menu">
           <li><a href="carton.php"><i class="fa fa-circle-o"></i>Carton Option</a></li>
         </ul>
-      </li>
+      </li> -->
 
       <li class="treeview">
         <a href="#">

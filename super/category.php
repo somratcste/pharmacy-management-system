@@ -64,7 +64,7 @@ if(isset($_POST['form_edit_Category']))
   try {
     
     if(empty($_POST['cat_name'])) {
-      throw new Exception("Category Name can not be empty.");
+      throw new Exception("Box Name can not be empty.");
     }
     
     
@@ -72,7 +72,7 @@ if(isset($_POST['form_edit_Category']))
     $statement->execute(array($_POST['cat_name'],$id));
     
     
-    $success_message = "Category Name has been updated successfully.";
+    $success_message = "Box Name has been updated successfully.";
     
   
   }
@@ -92,7 +92,7 @@ if(isset($_POST['form_edit_Category']))
     <div class="box box-default">
       <div class="box box-info">
           <div class="box-header with-border">
-            <h3 class="box-title">Add New Category</h3>
+            <h3 class="box-title">Add New Store Box</h3>
           </div><!-- /.box-header -->
             <?php
               if(isset($error_message))
@@ -113,9 +113,9 @@ if(isset($_POST['form_edit_Category']))
           <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-3 control-label">Category Name </label>
+                <label for="inputEmail3" class="col-sm-3 control-label">Box Name </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" placeholder="Insert Product Name" name="cat_name">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="Insert Box Name" name="cat_name">
                 </div>
               </div>
 
@@ -134,7 +134,7 @@ if(isset($_POST['form_edit_Category']))
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">View All Category </h3>
+                  <h3 class="box-title">View All Box Name </h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  <div class="table-responsive">  

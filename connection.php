@@ -1,6 +1,6 @@
 <?php 
 $dbhost = 'localhost';
-$dbname = 'haque-agencies';
+$dbname = 'pharmacy';
 $dbuser = 'root';
 $dbpass = '';
 
