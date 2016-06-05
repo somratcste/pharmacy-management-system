@@ -12,10 +12,8 @@ require_once('delete_confirm.php');
 ?>
 
 <?php 
-if (isset($_GET['com_id']) & isset($_GET['cat_id']) & isset($_GET['size_id'])) {
+if (isset($_GET['com_id'])) {
     $com_id =  $_GET['com_id'];
-    $cat_id =  $_GET['cat_id'];
-    $size_id = $_GET['size_id'];
 } 
 ?>
 
@@ -25,13 +23,6 @@ $statement3 = $db->prepare("SELECT * FROM table_companies WHERE com_id = ?");
 $statement3->execute(array($com_id));
 $company_name = $statement3->fetch()["com_name"];
 
-$statement3 = $db->prepare("SELECT * FROM table_categories WHERE cat_id = ?");
-$statement3->execute(array($cat_id));
-$category_name = $statement3->fetch()["cat_name"];
-
-$statement3 = $db->prepare("SELECT * FROM table_sizes WHERE size_id = ?");
-$statement3->execute(array($size_id));
-$size_name = $statement3->fetch()["size_name"];
 
 ?>
 
@@ -42,7 +33,7 @@ $size_name = $statement3->fetch()["size_name"];
             <div class="col-xs-12">
               <div class="box">
                 <div align="center" class="box-header with-border">
-                  <h3 class="box-title"><?php echo $company_name; ?> / <?php echo $category_name; ?> / <?php echo $size_name; ?></h3>
+                  <h3 class="box-title"><?php echo $company_name; ?></h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                  <div class="table-responsive">  
@@ -67,8 +58,8 @@ $size_name = $statement3->fetch()["size_name"];
 
           <?php
         $i=0;
-        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? AND cat_id = ? AND size_id = ? ORDER BY p_id DESC");
-        $statement->execute(array($com_id,$cat_id,$size_id));
+        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? ORDER BY p_id DESC");
+        $statement->execute(array($com_id));
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach($result as $row)
         {

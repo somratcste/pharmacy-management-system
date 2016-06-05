@@ -57,7 +57,7 @@ foreach ($companies as $com) {
   {
 ?>
     <li class="treeview">
-        <a href="#">
+        <a href="product-details.php?com_id=<?php echo $company_id; ?>">
           <i class="fa fa-gg"></i> <span><?php echo $company_name; ?></span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -68,66 +68,11 @@ foreach ($companies as $com) {
   {
 ?>
     <li class="treeview">
-        <a href="#">
+        <a href="product-details.php?com_id=<?php echo $company_id; ?>">
           <i class="fa fa-gg"></i> <span><?php echo $company_name; ?></span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
-    <ul class="treeview-menu">
-<?php
-
-    foreach ($categories as $cat) {
-
-      $category_id = $cat["cat_id"];
-
-      $statement3 = $db->prepare("SELECT * FROM table_categories WHERE cat_id = ?");
-      $statement3->execute(array($category_id));
-
-      $category = $statement3->fetchAll(PDO::FETCH_ASSOC);
-      $category_name = $category[0]["cat_name"];
-
-      $statement3 = $db->prepare("SELECT DISTINCT size_id FROM table_products WHERE cat_id = ? AND com_id = ? ");
-      $statement3->execute(array($category_id, $company_id));
-
-        $sizes= $statement3->fetchAll(PDO::FETCH_ASSOC);
-
-        if(count($sizes) == 0)
-        {
-?>
-          <li>
-            <a href="#"><i class="fa fa-circle-o"></i><?php echo $category_name; ?><i class="fa fa-angle-left pull-right"></i></a>
-          </li>
-<?php
-        }
-        else
-        {
-?>
-          <li>
-            <a href="#"><i class="fa fa-circle-o"></i><?php echo $category_name; ?><i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-<?php
-        foreach ($sizes as $s) {
-
-          $size_id = $s["size_id"]; 
-
-          $statement4 = $db->prepare("SELECT * FROM table_sizes where size_id = ?");
-          $statement4->execute(array($size_id));
-
-          $size = $statement4->fetchAll(PDO::FETCH_ASSOC);
-          $size_name = $size[0]["size_name"]; 
-?>    
-          <li>
-                <a href="product-details.php?com_id=<?php echo $company_id; ?>&amp;cat_id=<?php echo $category_id; ?>&amp;size_id=<?php echo $size_id; ?>" ><i class="fa fa-circle-o"></i><?php echo $size_name; ?></a>
-          </li>
-<?php
-        }
-?>
-        </ul>
-        </li>
-<?php
-      }
-      }
-?>
-    </ul>
+  
     </li>
 <?php
   }
