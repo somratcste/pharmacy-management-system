@@ -26,9 +26,6 @@
       </ul>
     </li>
 
-<!--
-  <ul class="nav navbar-nav collapse navbar-collapse">
-    <li><a href="index.php" class="active">Home</a></li>  -->
 
 <?php
 
