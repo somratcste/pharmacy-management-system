@@ -113,6 +113,21 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav"> 
 
+
+              <li class="dropdown user user-menu">
+                <a href="invoice.php" class="dropdown-toggle" > Sell
+                  <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+                  <!-- <span class="user-image">Logout</span> -->
+                </a>
+              </li> 
+
+              <li class="dropdown user user-menu">
+                <a href="search.php" class="dropdown-toggle" > Search
+                  <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+                  <!-- <span class="user-image">Logout</span> -->
+                </a>
+              </li>
+
               <li class="dropdown user user-menu">
                 <a href="logout.php" class="dropdown-toggle" > Logout
                   <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->

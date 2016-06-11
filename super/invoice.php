@@ -5,9 +5,7 @@ if($_SESSION['name']!='www.somrat.info')
 {
   header('location: index.php');
 }
-include("header.php"); 
-
-include ("left-sidebar-set.php") ;
+include("head.php"); 
 ?>
 
 <div class="content-wrapper">
@@ -25,7 +23,7 @@ include ("left-sidebar-set.php") ;
                     <thead>
                         <tr>
 							<th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
-							<th width="15%">Item No</th>
+							<th width="15%">Item ID</th>
 							<th width="38%">Item Name</th>
 							<th width="15%">Price</th>
 							<th width="15%">Quantity</th>
@@ -117,4 +115,4 @@ include ("left-sidebar-set.php") ;
   </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 
-<?php include ("footer.php"); ?>
+<?php include ("footer_invoice.php"); ?>
