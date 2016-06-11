@@ -17,12 +17,12 @@ if(isset($_POST['form1']))
 {
   try {
     
-    if(empty($_POST['p_name'])) {
+    if(empty($_POST['productName'])) {
       throw new Exception("Trade Name can not be empty.");
     }
 
-    $statement = $db->prepare("SELECT * FROM table_products WHERE p_name=?");
-    $statement->execute(array($_POST['p_name']));
+    $statement = $db->prepare("SELECT * FROM table_products WHERE productName=?");
+    $statement->execute(array($_POST['productName']));
     $total = $statement->rowCount();
     
     if($total>0) {
@@ -40,12 +40,12 @@ if(isset($_POST['form1']))
       
     }
 
-    if(empty($_POST['p_price'])) {
+    if(empty($_POST['buyPrice'])) {
       throw new Exception("Purchase Price Cat not be empty");
       
     }
 
-    if(empty($_POST['s_price'])) {
+    if(empty($_POST['sellPrice'])) {
       throw new Exception("Selling Price Cat not be empty");
       
     }
@@ -62,8 +62,8 @@ if(isset($_POST['form1']))
     $p_day = substr($p_date,8,2);
 
 
-    $statement = $db->prepare("INSERT INTO table_products (p_name,com_id,cat_id,p_peice,p_price,s_price,e_date,p_date) VALUES (?,?,?,?,?,?,?,?)");
-    $statement->execute(array($_POST['p_name'],$_POST['com_id'],$_POST['cat_id'],$_POST['p_peice'],$_POST['p_price'],$_POST['s_price'],$_POST['e_date'],$p_date));
+    $statement = $db->prepare("INSERT INTO table_products (productName,com_id,cat_id,quantityInStock,buyPrice,sellPrice,e_date,p_date) VALUES (?,?,?,?,?,?,?,?)");
+    $statement->execute(array($_POST['productName'],$_POST['com_id'],$_POST['cat_id'],$_POST['quantityInStock'],$_POST['buyPrice'],$_POST['sellPrice'],$_POST['e_date'],$p_date));
 
     $success_message = "Product has been inserted successfully.";
     
@@ -81,7 +81,7 @@ if(isset($_REQUEST['id']))
 {
   $id = $_REQUEST['id'];
   
-  $statement = $db->prepare("DELETE FROM table_products WHERE p_id=?");
+  $statement = $db->prepare("DELETE FROM table_products WHERE productCode=?");
   $statement->execute(array($id));
   
   $success_message2 = "Product has been deleted successfully.";
@@ -99,7 +99,7 @@ if(isset($_POST['form_product_increment'])) {
   $id = $_REQUEST['pinid'];
   try {
   
-    $p_peice_entry = $_POST['p_peice_entry'];
+    $quantityInStock_entry = $_POST['quantityInStock_entry'];
 
     if(empty($_POST['inc_address'])) {
       throw new Exception("Memo No. can not be empty");
@@ -115,24 +115,24 @@ if(isset($_POST['form_product_increment'])) {
     $p_day = substr($p_date,8,2);
 
 
-    $statement = $db->prepare("INSERT INTO product_increment (p_peice,p_id,p_date,inc_address,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
+    $statement = $db->prepare("INSERT INTO product_increment (quantityInStock,productCode,p_date,inc_address,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
     
-    $statement->execute(array($_POST['p_peice_entry'],$id,$p_date,$inc_address,$p_day,$p_month,$p_year));
+    $statement->execute(array($_POST['quantityInStock_entry'],$id,$p_date,$inc_address,$p_day,$p_month,$p_year));
     $success_message = "Product Increment has been successfully added.";
 
     
-    $statement = $db->prepare("SELECT * FROM table_products WHERE p_id=?");
+    $statement = $db->prepare("SELECT * FROM table_products WHERE productCode=?");
     $statement->execute(array($id));
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     foreach($result as $row)
     {
-      $p_peice = $row['p_peice'];
+      $quantityInStock = $row['quantityInStock'];
     }
 
-    $p_peice = $p_peice + $p_peice_entry;
+    $quantityInStock = $quantityInStock + $quantityInStock_entry;
 
-    $statement = $db->prepare("UPDATE table_products SET  p_peice = ? WHERE p_id =? ");
-    $statement->execute(array($p_peice,$id));
+    $statement = $db->prepare("UPDATE table_products SET  quantityInStock = ? WHERE productCode =? ");
+    $statement->execute(array($quantityInStock,$id));
     
   
   }
@@ -153,7 +153,7 @@ if(isset($_POST['form_product_decrement'])) {
     $id = $_REQUEST['pdecid'];
   try {
   
-    $p_peice_entry = $_POST['p_peice_entry'];
+    $quantityInStock_entry = $_POST['quantityInStock_entry'];
 
     if(empty($_POST['dec_address'])) {
       throw new Exception("Memo no. can not be empty");
@@ -169,25 +169,25 @@ if(isset($_POST['form_product_decrement'])) {
     $p_day = substr($p_date,8,2);
 
 
-    $statement = $db->prepare("INSERT INTO product_decrement (p_peice,p_id,p_date,dec_address,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
+    $statement = $db->prepare("INSERT INTO product_decrement (quantityInStock,productCode,p_date,dec_address,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
     
-    $statement->execute(array($_POST['p_peice_entry'],$id,$p_date,$dec_address,$p_day,$p_month,$p_year));
+    $statement->execute(array($_POST['quantityInStock_entry'],$id,$p_date,$dec_address,$p_day,$p_month,$p_year));
     $success_message = "Product Decrement has been successfully Removed.";
 
 
 
-    $statement = $db->prepare("SELECT * FROM table_products WHERE p_id=?");
+    $statement = $db->prepare("SELECT * FROM table_products WHERE productCode=?");
     $statement->execute(array($id));
     $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     foreach($result as $row)
     {
-      $p_peice = $row['p_peice'];
+      $quantityInStock = $row['quantityInStock'];
     }
   
-    $p_peice = $p_peice - $p_peice_entry ; 
+    $quantityInStock = $quantityInStock - $quantityInStock_entry ; 
 
-    $statement = $db->prepare("UPDATE table_products SET p_peice = ?  WHERE p_id =? ");
-    $statement->execute(array($p_peice,$id));
+    $statement = $db->prepare("UPDATE table_products SET quantityInStock = ?  WHERE productCode =? ");
+    $statement->execute(array($quantityInStock,$id));
     
   
   }
@@ -209,18 +209,9 @@ if(isset($_POST['form_edit'])) {
   $id = $_REQUEST['peditid'];
   try {
   
-    if(empty($_POST['p_name'])) {
+    if(empty($_POST['productName'])) {
       throw new Exception("Trade Name can not be empty.");
     }
-
-    $statement = $db->prepare("SELECT * FROM table_products WHERE p_name=?");
-    $statement->execute(array($_POST['p_name']));
-    $total = $statement->rowCount();
-    
-    if($total>0) {
-      throw new Exception("Product Name already exists.");
-    }
-
 
     if(empty($_POST['com_id'])) {
       throw new Exception("Company Name Cat not be selected");
@@ -232,12 +223,12 @@ if(isset($_POST['form_edit'])) {
       
     }
 
-    if(empty($_POST['p_price'])) {
+    if(empty($_POST['buyPrice'])) {
       throw new Exception("Purchase Price Cat not be empty");
       
     }
 
-    if(empty($_POST['s_price'])) {
+    if(empty($_POST['sellPrice'])) {
       throw new Exception("Selling Price Can not be empty");
       
     }
@@ -248,8 +239,8 @@ if(isset($_POST['form_edit'])) {
     }
 
             
-      $statement = $db->prepare("UPDATE table_products SET p_name=?, com_id=?, cat_id=?,  p_peice = ? , p_price = ? , s_price = ? , e_date = ? WHERE p_id =? ");
-      $statement->execute(array($_POST['p_name'],$_POST['com_id'],$_POST['cat_id'],$_POST['p_peice'],$_POST['p_price'],$_POST['s_price'],$_POST['e_date'],$id));
+      $statement = $db->prepare("UPDATE table_products SET productName=?, com_id=?, cat_id=?,  quantityInStock = ? , buyPrice = ? , sellPrice = ? , e_date = ? WHERE productCode =? ");
+      $statement->execute(array($_POST['productName'],$_POST['com_id'],$_POST['cat_id'],$_POST['quantityInStock'],$_POST['buyPrice'],$_POST['sellPrice'],$_POST['e_date'],$id));
 
      
     $success_message = "Product has been updated successfully.";
@@ -297,7 +288,7 @@ if(isset($_POST['form_edit'])) {
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">M. Trade Name</label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" placeholder="Insert Trade Name" name="p_name">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="Insert Trade Name" name="productName">
                 </div>
               </div>
 
@@ -349,55 +340,26 @@ if(isset($_POST['form_edit'])) {
               </div>
             </div>
 
-            <!-- <div class="form-group">
-              <label for="inputEmail3" class="col-sm-3 control-label">Select Size </label>
-              <div class="col-sm-6">
-                <select class="form-control" name="size_id">
-                <option value="">Select A Size</option>
-                <?php
-
-                $statement = $db->prepare("SELECT * FROM table_sizes");
-                $statement->execute();
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-                  foreach ($result as $row) { ?>
-
-
-                    <option value="<?php echo $row['size_id']; ?>"><?php echo $row['size_name'] ; ?></option>
-
-                    <?php
-                  
-                    }
-
-                ?>
-              </select>
-              </div>
-            </div> -->
-
-            <!-- <div class="form-group">
-                <label for="inputEmail3" class="col-sm-3 control-label">Upload Image </label>
-                <div class="col-sm-6">
-                  <input type="file" class="form-control" id="inputEmail3" placeholder="Insert Price" name="p_image">
-                </div>
-              </div> -->
+           
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">Product Piece </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" placeholder="Insert Piece" name="p_peice">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="Insert Piece" name="quantityInStock">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">Purchase Price </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" placeholder="Purchase Price" name="p_price">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="Purchase Price" name="buyPrice">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-3 control-label">Selling Price </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" placeholder="Selling Price" name="s_price">
+                  <input type="text" class="form-control" id="inputEmail3" placeholder="Selling Price" name="sellPrice">
                 </div>
               </div>
 
@@ -450,7 +412,7 @@ if(isset($_POST['form_edit'])) {
 
           <?php
         $i=0;
-        $statement = $db->prepare("SELECT * FROM table_products ORDER BY p_id DESC LIMIT 20 ");
+        $statement = $db->prepare("SELECT * FROM table_products ORDER BY productCode DESC LIMIT 20 ");
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach($result as $row)
@@ -460,7 +422,7 @@ if(isset($_POST['form_edit'])) {
 
             <tr>
               <td><?php echo $i ; ?></td>
-                  <td><?php echo $row['p_name']; ?></td>
+                  <td><?php echo $row['productName']; ?></td>
                   <td>
                     <?php
                         $statement1 = $db->prepare("SELECT * FROM table_categories WHERE cat_id=?");
@@ -472,9 +434,9 @@ if(isset($_POST['form_edit'])) {
                         }
                       ?>
                   </td>
-                  <td><?php echo $row['p_peice']; ?></td>
-                  <td><?php echo $row['p_price']; ?></td>
-                  <td><?php echo $row['s_price']; ?></td>
+                  <td><?php echo $row['quantityInStock']; ?></td>
+                  <td><?php echo $row['buyPrice']; ?></td>
+                  <td><?php echo $row['sellPrice']; ?></td>
                   
 
                   
@@ -492,7 +454,7 @@ if(isset($_POST['form_edit'])) {
                           <h4 class="modal-title" id="myModalLabel">View Product Details</h4>
                         </div>
                         <div class="modal-body">
-                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['p_name'] ; ?> </p>
+                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php
@@ -518,9 +480,9 @@ if(isset($_POST['form_edit'])) {
                         ?>
                         </p>
 
-                        <p><b>Piece <span style="margin-left:8em"></span> : </b><?php echo $row['p_peice']; ?></p>
-                        <p><b>Purchase Price<span style="margin-left:3.8em"></span> : </b><?php echo $row['p_price']; ?> Tk/-</p>
-                        <p><b>Selling Price<span style="margin-left:5em"></span> : </b><?php echo $row['s_price']; ?> Tk/-</p>
+                        <p><b>Piece <span style="margin-left:8em"></span> : </b><?php echo $row['quantityInStock']; ?></p>
+                        <p><b>Purchase Price<span style="margin-left:3.8em"></span> : </b><?php echo $row['buyPrice']; ?> Tk/-</p>
+                        <p><b>Selling Price<span style="margin-left:5em"></span> : </b><?php echo $row['sellPrice']; ?> Tk/-</p>
                         
                         <p><b>Expire Date <span style="margin-left:5.4em"></span> : </b><?php echo $row['e_date']; ?></p>
                       
@@ -534,7 +496,7 @@ if(isset($_POST['form_edit'])) {
                   <!--End product view Modal -->
                    
 
-                  <!-- <td><a href="product-edit.php?id=<?php //echo $row['p_id']; ?>" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></a></td> -->
+                  <!-- <td><a href="product-edit.php?id=<?php //echo $row['productCode']; ?>" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></a></td> -->
 
                   <td><button class="btn btn-primary" data-toggle="modal" data-target="#editModal<?php echo $i ; ?>">Edit</button></td>
 <!--product edit modal -->
@@ -559,12 +521,12 @@ if(isset($_POST['form_edit'])) {
           </div><!-- /.box-header -->
           
           <!-- form start -->
-          <form class="form-horizontal" action="product.php?peditid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/form-data">
+          <form class="form-horizontal" action="product.php?peditid=<?php echo $row['productCode']; ?>" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">M. Trade Name</label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_name']; ?>" name="p_name">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['productName']; ?>" name="productName">
                 </div>
               </div>
 
@@ -631,21 +593,21 @@ if(isset($_POST['form_edit'])) {
              <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_peice']; ?>" name="p_peice">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['quantityInStock']; ?>" name="quantityInStock">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Purchase Price </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_price']; ?>" name="p_price">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['buyPrice']; ?>" name="buyPrice">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Selling Price </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['s_price']; ?>" name="s_price">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['sellPrice']; ?>" name="sellPrice">
                 </div>
               </div>
 
@@ -675,7 +637,7 @@ if(isset($_POST['form_edit'])) {
 <!--Product edit modal end -->
 
 
-                  <td><form method="POST" action="product.php?id=<?php echo $row['p_id']; ?>" accept-charset="UTF-8" style="display:inline"><button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete Product" data-message="Are you sure you want to delete ?"> <i class="glyphicon glyphicon-trash"></i> Delete</button></form></td>
+                  <td><form method="POST" action="product.php?id=<?php echo $row['productCode']; ?>" accept-charset="UTF-8" style="display:inline"><button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete Product" data-message="Are you sure you want to delete ?"> <i class="glyphicon glyphicon-trash"></i> Delete</button></form></td>
 
                   <td><a href="" data-toggle="modal" data-target="#product_increment"><img src="../dist/img/plus.jpg" alt="" title="" border="0" /></a> || <a href="" data-toggle="modal" data-target="#product_decrement"><img src="../dist/img/minus.jpg" alt="" title="" border="0" /></a> </td>
 
@@ -699,7 +661,7 @@ if(isset($_POST['form_edit'])) {
                             </div><!-- /.box-header -->
                           
                             <!-- form start -->
-                            <form class="form-horizontal" action="product.php?pinid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/formdata">
+                            <form class="form-horizontal" action="product.php?pinid=<?php echo $row['productCode']; ?>" method="post" enctype="multipart/formdata">
 
                               <div class="box-body">
                                 
@@ -707,7 +669,7 @@ if(isset($_POST['form_edit'])) {
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 
@@ -751,13 +713,13 @@ if(isset($_POST['form_edit'])) {
                             </div><!-- /.box-header -->
                           
                             <!-- form start -->
-                            <form class="form-horizontal" action="product.php?pdecid=<?php echo $row['p_id']; ?>"  method="post" enctype="multipart/formdata">
+                            <form class="form-horizontal" action="product.php?pdecid=<?php echo $row['productCode']; ?>"  method="post" enctype="multipart/formdata">
                               <div class="box-body">
 
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 

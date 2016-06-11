@@ -58,7 +58,7 @@ $company_name = $statement3->fetch()["com_name"];
 
           <?php
         $i=0;
-        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? ORDER BY p_id DESC");
+        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? ORDER BY productCode DESC");
         $statement->execute(array($com_id));
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach($result as $row)
@@ -68,7 +68,7 @@ $company_name = $statement3->fetch()["com_name"];
 
             <tr>
               <td><?php echo $i ; ?></td>
-                  <td><?php echo $row['p_name']; ?></td>
+                  <td><?php echo $row['productName']; ?></td>
                   <td>
                     <?php
                         $statement1 = $db->prepare("SELECT * FROM table_categories WHERE cat_id=?");
@@ -80,9 +80,9 @@ $company_name = $statement3->fetch()["com_name"];
                         }
                       ?>
                   </td>
-                  <td><?php echo $row['p_peice']; ?></td>
-                  <td><?php echo $row['p_price']; ?></td>
-                  <td><?php echo $row['s_price']; ?></td>
+                  <td><?php echo $row['quantityInStock']; ?></td>
+                  <td><?php echo $row['buyPrice']; ?></td>
+                  <td><?php echo $row['sellPrice']; ?></td>
                   
 
                   
@@ -100,7 +100,7 @@ $company_name = $statement3->fetch()["com_name"];
                           <h4 class="modal-title" id="myModalLabel">View Product Details</h4>
                         </div>
                         <div class="modal-body">
-                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['p_name'] ; ?> </p>
+                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php
@@ -126,9 +126,9 @@ $company_name = $statement3->fetch()["com_name"];
                         ?>
                         </p>
 
-                        <p><b>Piece <span style="margin-left:8em"></span> : </b><?php echo $row['p_peice']; ?></p>
-                        <p><b>Purchase Price<span style="margin-left:3.8em"></span> : </b><?php echo $row['p_price']; ?> Tk/-</p>
-                        <p><b>Selling Price<span style="margin-left:5em"></span> : </b><?php echo $row['s_price']; ?> Tk/-</p>
+                        <p><b>Piece <span style="margin-left:8em"></span> : </b><?php echo $row['quantityInStock']; ?></p>
+                        <p><b>Purchase Price<span style="margin-left:3.8em"></span> : </b><?php echo $row['buyPrice']; ?> Tk/-</p>
+                        <p><b>Selling Price<span style="margin-left:5em"></span> : </b><?php echo $row['sellPrice']; ?> Tk/-</p>
                         
                         <p><b>Expire Date <span style="margin-left:5.4em"></span> : </b><?php echo $row['e_date']; ?></p>
                       
@@ -142,7 +142,7 @@ $company_name = $statement3->fetch()["com_name"];
                   <!--End product view Modal -->
                    
 
-                  <!-- <td><a href="product-edit.php?id=<?php //echo $row['p_id']; ?>" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></a></td> -->
+                  <!-- <td><a href="product-edit.php?id=<?php //echo $row['productCode']; ?>" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></a></td> -->
 
                   <td><button class="btn btn-primary" data-toggle="modal" data-target="#editModal<?php echo $i ; ?>">Edit</button></td>
 <!--product edit modal -->
@@ -167,12 +167,12 @@ $company_name = $statement3->fetch()["com_name"];
           </div><!-- /.box-header -->
           
           <!-- form start -->
-          <form class="form-horizontal" action="message.php?peditid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/form-data">
+          <form class="form-horizontal" action="message.php?peditid=<?php echo $row['productCode']; ?>" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">M. Trade Name</label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_name']; ?>" name="p_name">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['productName']; ?>" name="productName">
                 </div>
               </div>
 
@@ -239,21 +239,21 @@ $company_name = $statement3->fetch()["com_name"];
              <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_peice']; ?>" name="p_peice">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['quantityInStock']; ?>" name="quantityInStock">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Purchase Price </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['p_price']; ?>" name="p_price">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['buyPrice']; ?>" name="buyPrice">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="inputEmail3" class="col-sm-4 control-label">Selling Price </label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['s_price']; ?>" name="s_price">
+                  <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['sellPrice']; ?>" name="sellPrice">
                 </div>
               </div>
 
@@ -283,7 +283,7 @@ $company_name = $statement3->fetch()["com_name"];
 <!--Product edit modal end -->
 
 
-                  <td><form method="POST" action="message.php?id=<?php echo $row['p_id']; ?>" accept-charset="UTF-8" style="display:inline"><button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete Product" data-message="Are you sure you want to delete ?"> <i class="glyphicon glyphicon-trash"></i> Delete</button></form></td>
+                  <td><form method="POST" action="message.php?id=<?php echo $row['productCode']; ?>" accept-charset="UTF-8" style="display:inline"><button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#confirmDelete" data-title="Delete Product" data-message="Are you sure you want to delete ?"> <i class="glyphicon glyphicon-trash"></i> Delete</button></form></td>
 
                   <td><a href="" data-toggle="modal" data-target="#product_increment"><img src="../dist/img/plus.jpg" alt="" title="" border="0" /></a> || <a href="" data-toggle="modal" data-target="#product_decrement"><img src="../dist/img/minus.jpg" alt="" title="" border="0" /></a> </td>
 
@@ -307,7 +307,7 @@ $company_name = $statement3->fetch()["com_name"];
                             </div><!-- /.box-header -->
                           
                             <!-- form start -->
-                            <form class="form-horizontal" action="message.php?pinid=<?php echo $row['p_id']; ?>" method="post" enctype="multipart/formdata">
+                            <form class="form-horizontal" action="message.php?pinid=<?php echo $row['productCode']; ?>" method="post" enctype="multipart/formdata">
 
                               <div class="box-body">
                                 
@@ -315,7 +315,7 @@ $company_name = $statement3->fetch()["com_name"];
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 
@@ -359,13 +359,13 @@ $company_name = $statement3->fetch()["com_name"];
                             </div><!-- /.box-header -->
                           
                             <!-- form start -->
-                            <form class="form-horizontal" action="message.php?pdecid=<?php echo $row['p_id']; ?>"  method="post" enctype="multipart/formdata">
+                            <form class="form-horizontal" action="message.php?pdecid=<?php echo $row['productCode']; ?>"  method="post" enctype="multipart/formdata">
                               <div class="box-body">
 
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 

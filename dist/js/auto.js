@@ -51,6 +51,7 @@ $(document).on('focus','.autocomplete_txt',function(){
 				url : 'ajax.php',
 				dataType: "json",
 				method: 'post',
+				
 				data: {
 				   name_startsWith: request.term,
 				   type: type
@@ -62,6 +63,7 @@ $(document).on('focus','.autocomplete_txt',function(){
 							label: code[autoTypeNo],
 							value: code[autoTypeNo],
 							data : item
+
 						}
 					}));
 				}
