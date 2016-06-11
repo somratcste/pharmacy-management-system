@@ -210,6 +210,13 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../dist/js/demo.js"></script>
     <!-- Dialog show event handler -->
+
+    <!-- <script src="../dist/js/jquery.min.js"></script>
+    <script src="../dist/js/jquery-ui.min.js"></script> -->
+    <script src="../dist/js/auto.js"></script>
+    <script src="../dist/js/ie.js"></script>
+
+
     <script type="text/javascript">
       $('#confirmDelete').on('show.bs.modal', function (e) {
           $message = $(e.relatedTarget).attr('data-message');

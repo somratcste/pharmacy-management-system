@@ -83,6 +83,7 @@ if(isset($_POST['search']))
                 <div class="input-group bs-example">
 
                   <input type="text"  name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Search By Product Name... "> <br><br>
+
     
                  <button type="submit" name="search" class="btn btn-primary pull-right">Search</button>
                 </div>

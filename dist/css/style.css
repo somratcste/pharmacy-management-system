@@ -1,0 +1,73 @@
+body{
+	color: #111;
+    font-family: "Noto Serif",serif;
+    font-size: 16px;
+    line-height: 1.62em;
+}
+/********* nav starts here **********************/
+.nav{
+	font-family:Droid Sans;
+	text-transform: uppercase;
+}
+.nav a{
+	font-family:Droid Sans;
+}
+
+/* navbar */
+.navbar-default {
+    background-color: #f04949;
+    border-color: #f04949;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #fff;
+    font-size:20px;
+    font-weight: bold;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #fff;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #fff;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #f04949;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #f04949;
+}
+.nav li a:first{margin-left: 20%;}
+.nav li a{margin-right: 45%;font-size:1.1em;}
+.nav li a i{margin-right: 10px;}
+/*** nav ends here ****/
+
+
+.form-inline .form-group{
+	margin-bottom: 20px;
+	float: right;
+}
+.title{
+	background-color: #34495e;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 5px;
+}
+
+input[type=number]{ -moz-appearance: textfield; }
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
