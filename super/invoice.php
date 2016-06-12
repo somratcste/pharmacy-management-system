@@ -21,17 +21,69 @@ include("head.php");
 		        $a = $a+1; 
 		        ?>
 		      	<div class='box-body'>  
-				  <div class="col-md-6 form-inline pull-left"><div class="form-group">
-				    <label for="exampleInputName2">Memo No. :&nbsp; </label>
-				    <input type="text" class="form-control" id="exampleInputName2" value="<?php echo $a; ?>">
-				  </div></div>	      	
-				  
-				  <div class="col-md-6 form-inline pull-right"><div class="form-group">
-				    <label for="exampleInputName2">Date :&nbsp;</label>
-				    <input type="date" class="form-control" id="exampleInputName2" placeholder="Date">
-				  </div></div>
- 		
-		      	</div>
+				  <div class="row col-md-6 pull-left">
+					<div class="form-group form-inline">
+						<label class="col-sm-4" >Memo No : &nbsp;</label>
+						<div class="input-group col-sm-6">
+							<input type="text" class="form-control" placeholder="Memo No." value="<?php echo $a; ?>" >
+						</div>
+					</div>  
+					</div>  
+
+					<div class="row col-md-6 pull-right">
+					<div class="form-group form-inline">
+						<label class="col-sm-4" >Date : &nbsp;</label>
+						<div class="input-group col-sm-6">
+							<input type="date" class="form-control">
+						</div>
+					</div>  
+					</div>  
+
+					<div class="row col-md-6 pull-left">
+					<div class="form-group form-inline">
+						<label class="col-sm-4" >Customar Name : &nbsp;</label>
+						<div class="input-group col-sm-6">
+							<input type="text" class="form-control" placeholder="customar name">
+						</div>
+					</div>  
+					</div>	
+
+					<div class="row col-md-6 pull-right">
+					<div class="form-group form-inline">
+						<label class="col-sm-4" >Sex : &nbsp;</label>
+						<div class="input-group col-sm-6">
+							<select class="form-control" id="sel1">
+						        <option>Male</option>
+						        <option>Female</option>
+					      </select>
+						</div>
+					</div>  
+					</div>
+
+					<div class="row col-md-6 pull-left">
+					<div class="form-group form-inline">
+						<label class="col-sm-4" >Age : &nbsp;</label>
+						<div class="input-group col-sm-6">
+							<input type="text" class="form-control" placeholder="age">
+						</div>
+					</div>  
+					</div>
+
+					<div class="row col-md-6 pull-right">
+					<div class="form-group form-inline">
+						<label class="col-sm-4" >Ref. Doctor : &nbsp;</label>
+						<div class="input-group col-sm-6">
+							<select class="form-control" id="sel1">
+						        <option>Dr. Akter Uddin</option>
+						        <option>Dr. Gias Uddin</option>
+					      </select>
+						</div>
+					</div>  
+					</div>
+				 				  
+				 </div>
+
+				
                 <div class="box-body">
                  <div class="table-responsive">  
                  <form class="" method="post" action="invoice_save.php">
