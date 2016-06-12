@@ -180,7 +180,7 @@ if(isset($_POST['search']))
                           <h4 class="modal-title" id="myModalLabel">View Product Details</h4>
                         </div>
                         <div class="modal-body">
-                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
+                        <p><b>M. Trade Name<span style="margin-left:3.7em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php

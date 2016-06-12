@@ -454,7 +454,7 @@ if(isset($_POST['form_edit'])) {
                           <h4 class="modal-title" id="myModalLabel">View Product Details</h4>
                         </div>
                         <div class="modal-body">
-                        <p><b>M. Trade Name<span style="margin-left:4em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
+                        <p><b>M. Trade Name<span style="margin-left:3.8em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php
