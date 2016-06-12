@@ -1,0 +1,63 @@
+<?php 
+ob_start();
+session_start();
+if($_SESSION['name']!='www.somrat.info')
+{
+  header('location: index.php');
+}
+include("head.php"); 
+include("../connection.php");
+?>
+
+<div class="content-wrapper">
+  <section class="content">
+	<div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div align="center" class="box-header with-border">
+          <h3 class="box-title">View All Memos</h3>
+        </div><!-- /.box-header -->
+      	<div class='box-body'>  
+			<div class="table-responsive">          
+			  <table class="table">
+			    <thead>
+			      <tr>
+			        <th>S. No.</th>
+			        <th>Memo No.</th>
+			        <th>View</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			     <?php
+			        $i=0;
+			        $statement = $db->prepare("SELECT * FROM memo_info ORDER BY info_id DESC");
+			        $statement->execute(array());
+			        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+			        foreach($result as $row)
+			        {
+			          $i++;
+			          ?>
+
+            	  <tr>
+                     <td><?php echo $i ; ?></td>
+			        <td><?php echo $row['memo_no'] ; ?></td>
+			        <td><img src="../dist/img/view.jpg"></td>
+			      </tr>
+			      <?php 
+			      	}
+			      ?>
+			    </tbody>
+			  </table>
+			</div>  
+  		</div> <!--box body -->
+      </div>
+    </div>
+    </div>
+
+
+
+
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+
+<?php include ("footer_invoice.php"); ?>

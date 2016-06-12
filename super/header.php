@@ -109,6 +109,11 @@
             <ul class="nav navbar-nav"> 
 
             <li class="dropdown user user-menu">
+                <a href="memo.php" class="dropdown-toggle" > Memo
+                </a>
+              </li>
+
+            <li class="dropdown user user-menu">
                 <a href="invoice.php" class="dropdown-toggle" > Sell
                   <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
                   <!-- <span class="user-image">Logout</span> -->

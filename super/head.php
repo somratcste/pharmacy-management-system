@@ -113,6 +113,10 @@
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav"> 
 
+              <li class="dropdown user user-menu">
+                <a href="memo.php" class="dropdown-toggle" > Memo
+                </a>
+              </li>
 
               <li class="dropdown user user-menu">
                 <a href="invoice.php" class="dropdown-toggle" > Sell

@@ -2,7 +2,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.00
         </div>
-        <strong>Copyright &copy; 2016 <a href="http://somrat.info">HAQUE AGENCIES</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="http://somrat.info">TRUST ONE HOSPITAL</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
