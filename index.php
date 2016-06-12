@@ -91,7 +91,7 @@ if(isset($_POST['form_login']))
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition login-page">
+  <body class="hold-transition login-page" style="background-image:url(dist/img/medicine.png)">
     <div class="login-box">
       <div class="login-logo">
         <a href="#"><b>TRUST ONE </b> HOSPITAL</a>
