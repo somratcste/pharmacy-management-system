@@ -100,8 +100,8 @@ if(isset($_POST['invoice']))
 						<div class="input-group col-sm-6">
 							<select name="sex" class="form-control" id="sel1">
 								<option value="">Select Sex</option>
-						        <option value="m">Male</option>
-						        <option value="f">Female</option>
+						        <option value="1">Male</option>
+						        <option value="0">Female</option>
 					      </select>
 						</div>
 					</div>  

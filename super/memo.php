@@ -39,9 +39,9 @@ include("../connection.php");
 			          ?>
 
             	  <tr>
-                     <td><?php echo $i ; ?></td>
+                    <td><?php echo $i ; ?></td>
 			        <td><?php echo $row['memo_no'] ; ?></td>
-			        <td><img src="../dist/img/view.jpg"></td>
+			        <td><a href="view_memo.php?memo_no=<?php echo $row['memo_no']; ?>"><img src="../dist/img/view.jpg"></a></td>
 			      </tr>
 			      <?php 
 			      	}
