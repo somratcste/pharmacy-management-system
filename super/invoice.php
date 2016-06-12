@@ -6,6 +6,7 @@ if($_SESSION['name']!='www.somrat.info')
   header('location: index.php');
 }
 include("head.php"); 
+include("../connection.php");
 ?>
 
 <div class="content-wrapper">
@@ -22,10 +23,11 @@ include("head.php");
 		        ?>
 		      	<div class='box-body'>  
 				  <div class="row col-md-6 pull-left">
+				  <form class="" method="post" action="invoice_save.php" name="invoice">
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Memo No : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input type="text" class="form-control" placeholder="Memo No." value="<?php echo $a; ?>" >
+							<input name="memo_no" type="number" class="form-control" placeholder="Memo No." >
 						</div>
 					</div>  
 					</div>  
@@ -34,7 +36,7 @@ include("head.php");
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Date : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input type="date" class="form-control">
+							<input name="m_date" type="date" class="form-control">
 						</div>
 					</div>  
 					</div>  
@@ -43,7 +45,7 @@ include("head.php");
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Customar Name : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input type="text" class="form-control" placeholder="customar name">
+							<input name="customar_name" type="text" class="form-control" placeholder="customar name">
 						</div>
 					</div>  
 					</div>	
@@ -52,9 +54,10 @@ include("head.php");
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Sex : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<select class="form-control" id="sel1">
-						        <option>Male</option>
-						        <option>Female</option>
+							<select name="sex" class="form-control" id="sel1">
+								<option value="">Select Sex</option>
+						        <option value="m">Male</option>
+						        <option value="f">Female</option>
 					      </select>
 						</div>
 					</div>  
@@ -64,7 +67,7 @@ include("head.php");
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Age : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input type="text" class="form-control" placeholder="age">
+							<input name="age" type="number" class="form-control" placeholder="age">
 						</div>
 					</div>  
 					</div>
@@ -73,11 +76,25 @@ include("head.php");
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Ref. Doctor : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<select class="form-control" id="sel1">
-						        <option>Dr. Akter Uddin</option>
-						        <option>Dr. Gias Uddin</option>
-					      </select>
-						</div>
+		                <select class="form-control" name="doc_id">
+		                <option value="">Select A Doctor</option>
+		                <?php
+
+		                $statement = $db->prepare("SELECT * FROM doctors");
+		                $statement->execute();
+		                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		                  foreach ($result as $row) { ?>
+
+
+		                    <option value="<?php echo $row['doc_id']; ?>"><?php echo $row['doc_name'] ; ?></option>
+
+		                    <?php
+		                  
+		                    }
+
+		                ?>
+		              </select>
+		              </div>
 					</div>  
 					</div>
 				 				  
@@ -86,7 +103,7 @@ include("head.php");
 				
                 <div class="box-body">
                  <div class="table-responsive">  
-                 <form class="" method="post" action="invoice_save.php">
+                 
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -122,14 +139,14 @@ include("head.php");
 				<label class="col-sm-4" >Subtotal: &nbsp;</label>
 				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="number" class="form-control" id="subTotal" placeholder="Subtotal" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input name="subtotal" type="number" class="form-control" id="subTotal" placeholder="Subtotal" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
 			<div class="form-group form-inline">
 				<label class="col-sm-4">Percent: &nbsp;</label>
 				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="number" class="form-control" id="tax" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input name="percent" type="number" class="form-control" id="tax" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
        				<div class="input-group-addon">%</div>
 				</div>
 			</div>
@@ -137,7 +154,7 @@ include("head.php");
 				<label class="col-sm-4">Percent Amount: &nbsp;</label>
 				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="text" class="form-control" id="taxAmount" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">					
+					<input name="percent_amount" type="text" class="form-control" id="taxAmount" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">					
 				</div>
 			</div>
 
@@ -145,14 +162,14 @@ include("head.php");
 				<label class="col-sm-4">Without Percent: &nbsp;</label>
 				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="text" class="form-control" id="totalAftertax" placeholder="Without Percen" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input name="without_percent" type="text" class="form-control" id="totalAftertax" placeholder="Without Percen" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
 			<div class="form-group form-inline">
 				<label class="col-sm-4">Discount Amount: &nbsp;</label>
 				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="number" class="form-control" id="amountPaid" placeholder="Discount Amount" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input name="discount_amount" type="number" class="form-control" id="amountPaid" placeholder="Discount Amount" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
 			<div class="form-group form-inline">

@@ -47,25 +47,15 @@
         </ul>
       </li>
 
-      <!-- <li class="treeview">
-        <a href="#">
-          <i class="fa fa-gg"></i> <span>Size</span>
-          <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="size.php"><i class="fa fa-circle-o"></i>Size Option</a></li>
-        </ul>
-      </li>
-
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-gg"></i> <span>Carton</span>
+          <i class="fa fa-gg"></i> <span>Doctors</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          <li><a href="carton.php"><i class="fa fa-circle-o"></i>Carton Option</a></li>
+          <li><a href="doctors.php"><i class="fa fa-circle-o"></i>Doctors Section</a></li>
         </ul>
-      </li> -->
+      </li>
 
       <li class="treeview">
         <a href="#">
