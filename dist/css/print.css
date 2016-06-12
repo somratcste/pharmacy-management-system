@@ -1,0 +1,11 @@
+.main-footer {
+	display: none;
+}
+
+.box {
+    border-top: none;
+}
+
+.box-header.with-border {
+    border-bottom: none;
+}

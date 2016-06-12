@@ -56,7 +56,8 @@ foreach($result as $row)
     <div class="col-xs-12">
       <div class="box">
         <div align="center" class="box-header with-border">
-          <h3 class="box-title"></h3>
+          <h3 class="box-title">TRUST ONE HOSPITAL</h3>
+          <p>Maijdee-Court , Noakhali. Hello : 01823387518 </p>
       	<div class='box-body'>  
  			
  			<div class="table-responsive">  
