@@ -4,7 +4,7 @@
  */
 	      
 //adds extra table rows
-var i=$('table tr').length;
+var i=$('#invoice_bill tr').length;
 $(".addmore").on('click',function(){
 	html = '<tr>';
 	html += '<td><input class="case" type="checkbox"/></td>';
@@ -14,7 +14,7 @@ $(".addmore").on('click',function(){
 	html += '<td><input type="text" name="quantity[]" id="quantity_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
 	html += '<td><input type="text" name="total[]" id="total_'+i+'" class="form-control totalLinePrice" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
 	html += '</tr>';
-	$('table').append(html);
+	$('#invoice_bill').append(html);
 	i++;
 });
 

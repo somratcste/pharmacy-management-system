@@ -17,13 +17,10 @@ include("../connection.php");
                 <div align="center" class="box-header with-border">
                   <h3 class="box-title">Smart Sell</h3>
                 </div><!-- /.box-header -->
-                <?php 
-		        $a =0 ;
-		        $a = $a+1; 
-		        ?>
+                <form class="" method="post" action="invoice_save.php" enctype="multipart/form-data">
 		      	<div class='box-body'>  
 				  <div class="row col-md-6 pull-left">
-				  <form class="" method="post" action="invoice_save.php" name="invoice">
+				  
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Memo No : &nbsp;</label>
 						<div class="input-group col-sm-6">
@@ -104,7 +101,7 @@ include("../connection.php");
                 <div class="box-body">
                  <div class="table-responsive">  
                  
-                  <table id="example2" class="table table-bordered table-hover">
+                  <table id="invoice_bill" class="table table-bordered table-hover">
                     <thead>
                         <tr>
 							<th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
@@ -183,15 +180,15 @@ include("../connection.php");
           <div class="form-group">       	
 			<label class="col-sm-4"></label>	
 			<div class="input-group col-sm-6">
-			<input type=submit name="" value="Save" class="btn btn-primary btn-lg btn-block">
+			<input name="invoice" type=submit name="" value="Save" class="btn btn-primary btn-lg btn-block">
 			</div>
      
           </div>
 
-		</form>
+		
 		</div>
 
-
+		</form>
       	</div> <!--box body -->
         </div>
      </div>
