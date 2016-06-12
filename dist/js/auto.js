@@ -5,10 +5,7 @@
 	      
 //adds extra table rows
 var i=$('table tr').length;
-
-
 $(".addmore").on('click',function(){
-
 	html = '<tr>';
 	html += '<td><input class="case" type="checkbox"/></td>';
 	html += '<td><input type="text" data-type="productCode" name="itemNo[]" id="itemNo_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
@@ -19,12 +16,7 @@ $(".addmore").on('click',function(){
 	html += '</tr>';
 	$('table').append(html);
 	i++;
-	
 });
-
-
-
-
 
 //to check all checkboxes
 $(document).on('change','#check_all',function(){
@@ -51,7 +43,6 @@ $(document).on('focus','.autocomplete_txt',function(){
 				url : 'ajax.php',
 				dataType: "json",
 				method: 'post',
-				
 				data: {
 				   name_startsWith: request.term,
 				   type: type
@@ -63,7 +54,6 @@ $(document).on('focus','.autocomplete_txt',function(){
 							label: code[autoTypeNo],
 							value: code[autoTypeNo],
 							data : item
-
 						}
 					}));
 				}
@@ -110,14 +100,12 @@ function calculateTotal(){
 	if(tax != '' && typeof(tax) != "undefined" ){
 		taxAmount = subTotal * ( parseFloat(tax) /100 );
 		$('#taxAmount').val(taxAmount.toFixed(2));
-		total = subTotal - taxAmount ;
-
+		total = subTotal - taxAmount;
 	}else{
 		$('#taxAmount').val(0);
 		total = subTotal;
 	}
 	$('#totalAftertax').val( total.toFixed(2) );
-
 	calculateAmountDue();
 }
 
@@ -139,9 +127,6 @@ function calculateAmountDue(){
 }
 
 
-
-
-
 //It restrict the non-numbers
 var specialKeys = new Array();
 specialKeys.push(8,46); //Backspace
@@ -152,7 +137,3 @@ function IsNumeric(e) {
     return ret;
 }
 
-//datepicker
-// $(function () {
-//     $('#invoiceDate').datepicker({});
-// });

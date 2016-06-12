@@ -16,6 +16,22 @@ include("head.php");
                 <div align="center" class="box-header with-border">
                   <h3 class="box-title">Smart Sell</h3>
                 </div><!-- /.box-header -->
+                <?php 
+		        $a =0 ;
+		        $a = $a+1; 
+		        ?>
+		      	<div class='box-body'>  
+				  <div class="col-md-6 form-inline pull-left"><div class="form-group">
+				    <label for="exampleInputName2">Memo No. :&nbsp; </label>
+				    <input type="text" class="form-control" id="exampleInputName2" value="<?php echo $a; ?>">
+				  </div></div>	      	
+				  
+				  <div class="col-md-6 form-inline pull-right"><div class="form-group">
+				    <label for="exampleInputName2">Date :&nbsp;</label>
+				    <input type="date" class="form-control" id="exampleInputName2" placeholder="Date">
+				  </div></div>
+ 		
+		      	</div>
                 <div class="box-body">
                  <div class="table-responsive">  
                  <form class="" method="post" action="invoice_save.php">
@@ -50,54 +66,57 @@ include("head.php");
 
 				
 			<div class="row col-md-6 pull-right">
-			<div class="form-group">
-				<label>Subtotal: &nbsp;</label>
-				<div class="input-group">
+			<div class="form-group form-inline">
+				<label class="col-sm-4" >Subtotal: &nbsp;</label>
+				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
 					<input type="number" class="form-control" id="subTotal" placeholder="Subtotal" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
-			<div class="form-group">
-				<label>Percent: &nbsp;</label>
-				<div class="input-group">
+			<div class="form-group form-inline">
+				<label class="col-sm-4">Percent: &nbsp;</label>
+				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
 					<input type="number" class="form-control" id="tax" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
        				<div class="input-group-addon">%</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label>Percent Amount: &nbsp;</label>
-				<div class="input-group">
+			<div class="form-group form-inline">
+				<label class="col-sm-4">Percent Amount: &nbsp;</label>
+				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="number" class="form-control" id="taxAmount" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">					
+					<input type="text" class="form-control" id="taxAmount" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">					
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label>Without Percent: &nbsp;</label>
-				<div class="input-group">
+			<div class="form-group form-inline">
+				<label class="col-sm-4">Without Percent: &nbsp;</label>
+				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="number" class="form-control" id="totalAftertax" placeholder="Without Percen" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input type="text" class="form-control" id="totalAftertax" placeholder="Without Percen" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
-			<div class="form-group">
-				<label>Discount Amount: &nbsp;</label>
-				<div class="input-group">
+			<div class="form-group form-inline">
+				<label class="col-sm-4">Discount Amount: &nbsp;</label>
+				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
 					<input type="number" class="form-control" id="amountPaid" placeholder="Discount Amount" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
-			<div class="form-group">
-				<label>Total : &nbsp;</label>
-				<div class="input-group">
+			<div class="form-group form-inline">
+				<label class="col-sm-4">Total : &nbsp;</label>
+				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input type="number" class="form-control amountDue" id="amountDue" placeholder="Total" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input name="total_paid" type="number" class="form-control amountDue" id="amountDue" placeholder="Total" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
 				</div>
 			</div>
 
-          <div class="form-group">
-              <input type=submit name="" value="Save" class="btn btn-primary">
- 
+          <div class="form-group">       	
+			<label class="col-sm-4"></label>	
+			<div class="input-group col-sm-6">
+			<input type=submit name="" value="Save" class="btn btn-primary btn-lg btn-block">
+			</div>
+     
           </div>
 
 		</form>
