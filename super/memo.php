@@ -24,6 +24,7 @@ include("../connection.php");
 			      <tr>
 			        <th>S. No.</th>
 			        <th>Memo No.</th>
+			        <th>Edit</th>
 			        <th>View</th>
 			      </tr>
 			    </thead>
@@ -41,6 +42,7 @@ include("../connection.php");
             	  <tr>
                     <td><?php echo $i ; ?></td>
 			        <td><?php echo $row['memo_no'] ; ?></td>
+			        <td><a href="memo_edit.php?memo_no=<?php echo $row['memo_no']; ?>"><button class="btn btn-primary">Edit</button></a></td>
 			        <td><a href="view_memo.php?memo_no=<?php echo $row['memo_no']; ?>"><img src="../dist/img/view.jpg"></a></td>
 			      </tr>
 			      <?php 

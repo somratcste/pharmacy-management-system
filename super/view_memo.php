@@ -36,18 +36,7 @@ foreach($result as $row)
 	$doc_name = $row['doc_name'];
 }
 
-$statement = $db->prepare("SELECT * FROM memo_price WHERE memo_no = ?");
-$statement->execute(array($memo_no));
-$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-foreach($result as $row)
-{
- 	$subtotal 			= $row['subtotal'];
- 	$percent 			= $row['percent'];
- 	$percent_amount 	= $row['percent_amount'];
- 	$without_percent	= $row['without_percent'];
- 	$discount_amount	= $row['discount_amount'];
- 	$total_paid 		= $row['total_paid'];
-}		         
+	         
 ?>
 
 <div class="content-wrapper">
@@ -59,8 +48,8 @@ foreach($result as $row)
           <h3 class="box-title">TRUST ONE HOSPITAL</h3>
           <p>Maijdee-Court , Noakhali. Hello : 01823387518 </p>
       	<div class='box-body'>  
- 			
- 			<div class="table-responsive">  
+        
+ 			  <div class="table-responsive">  
                  
                   <table id="invoice_bill" class="table table-bordered table-hover">
                     <thead>
@@ -104,9 +93,9 @@ foreach($result as $row)
                     </thead>
 
                     <tbody>
-                    	<?php
+                <?php
 				        $i=0;
-				        $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ?");
+				        $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? ");
 				        $statement->execute(array($memo_no));
 				        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 				        foreach($result as $row)
@@ -131,30 +120,42 @@ foreach($result as $row)
 			<div class="row col-md-4 pull-right">
 				<table id="invoice_bill" class="table table-bordered table-hover">
                     <tbody>
+                    <?php
+                    $statement1 = $db->prepare("SELECT * FROM memo_price WHERE memo_no = ?");
+                    $statement1->execute(array($memo_no));
+                    $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($result1 as $row1)
+                    {
+                    
+                    ?>
                         <tr>
                         	<td>Subtotal</td>
-                        	<td><?php echo $subtotal; ?></td>
+                        	<td><?php echo $row1['subtotal']; ?></td>
                         </tr>
                         <tr>
                         	<td>Percent</td>
-                        	<td><?php echo $percent; ?></td>
+                        	<td><?php echo $row1['percent']; ?></td>
                         </tr>
                         <tr>
                         	<td>Percent Amount</td>
-                        	<td><?php echo $percent_amount; ?></td>
+                        	<td><?php echo $row1['percent_amount']; ?></td>
                         </tr>
                         <tr>
                         	<td>Without Percent</td>
-                        	<td><?php echo $without_percent; ?></td>
+                        	<td><?php echo $row1['without_percent']; ?></td>
                         </tr>
                         <tr>
                         	<td>Discount Amount</td>
-                        	<td><?php echo $discount_amount; ?></td>
+                        	<td><?php echo $row1['discount_amount']; ?></td>
                         </tr>
                         <tr>
                         	<td>Total</td>
-                        	<td><?php echo $total_paid; ?></td>
+                        	<td><?php echo $row1['total_paid']; ?></td>
                         </tr>
+
+                    <?php
+                    }
+                    ?>
 
                     </tbody>
                   </table>

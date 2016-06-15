@@ -17,8 +17,8 @@ if(isset($_POST['invoice']))
     $statement->execute(array($_POST['memo_no'],$_POST['m_date'],$_POST['customar_name'],$_POST['sex'],$_POST['age'],$_POST['doc_id']));
 
 
-    $statement = $db->prepare("INSERT INTO memo_price (memo_no, subtotal, percent, percent_amount, without_percent, discount_amount, total_paid) VALUES (?,?,?,?,?,?,?)");
-    $statement->execute(array($_POST['memo_no'],$_POST['subtotal'],$_POST['percent'],$_POST['percent_amount'],$_POST['without_percent'],$_POST['discount_amount'],$_POST['total_paid']));
+    $statement = $db->prepare("INSERT INTO memo_price (memo_no, subtotal, percent, percent_amount, without_percent, discount_amount, total_paid , m_date) VALUES (?,?,?,?,?,?,?,?)");
+    $statement->execute(array($_POST['memo_no'],$_POST['subtotal'],$_POST['percent'],$_POST['percent_amount'],$_POST['without_percent'],$_POST['discount_amount'],$_POST['total_paid'],$_POST['m_date']));
 
 
 
@@ -34,8 +34,8 @@ if(isset($_POST['invoice']))
         $total['total']        = $_POST['total'][$i];
         // echo $data['itemNo'] . " " .$data['itemName'] . " " . $data['price'] . " " . $data['quantity']. " " . $data['total'] ;
        //your insert query here
-       $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total) VALUES (?,?,?,?,?,?)");
-       $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+       $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total , m_date) VALUES (?,?,?,?,?,?,?)");
+       $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total'],$_POST['m_date']));
      }
 
 
@@ -65,9 +65,10 @@ if(isset($_POST['invoice']))
                 <div align="center" class="box-header with-border">
                   <h3 class="box-title">Smart Sell</h3>
                 </div><!-- /.box-header -->
+                <form class="" method="post" action="" enctype="multipart/form-data">
 		      	<div class='box-body'>  
 				  <div class="row col-md-6 pull-left">
-				  <form class="" method="post" action="" enctype="multipart/form-data">
+				  
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Memo No : &nbsp;</label>
 						<div class="input-group col-sm-6">
@@ -232,11 +233,12 @@ if(isset($_POST['invoice']))
      
           </div>
 
-		</form>
+		
 		</div>
 
 
       	</div> <!--box body -->
+      	</form>
         </div>
      </div>
     </div>
