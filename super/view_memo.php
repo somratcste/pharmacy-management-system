@@ -27,7 +27,7 @@ foreach($result as $row)
  	else
  		$sex = "Female";
 }
-
+$doc_name = "";
 $statement = $db->prepare("SELECT * FROM doctors WHERE doc_id = ?");
 $statement->execute(array($doc_id));
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);

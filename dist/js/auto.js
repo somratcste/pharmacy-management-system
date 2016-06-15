@@ -10,6 +10,7 @@ $(".addmore").on('click',function(){
 	html += '<td><input class="case" type="checkbox"/></td>';
 	html += '<td><input type="text" data-type="productCode" name="itemNo[]" id="itemNo_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
 	html += '<td><input type="text" data-type="productName" name="itemName[]" id="itemName_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
+	html += '<td><input type="text" data-type="productAvailable" name="itemAvailable[]" id="itemAvailable_'+i+'" class="form-control autocomplete_txt" autocomplete="off"></td>';
 	html += '<td><input type="text" name="price[]" id="price_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
 	html += '<td><input type="text" name="quantity[]" id="quantity_'+i+'" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
 	html += '<td><input type="text" name="total[]" id="total_'+i+'" class="form-control totalLinePrice" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>';
@@ -67,9 +68,10 @@ $(document).on('focus','.autocomplete_txt',function(){
 	  		id = id_arr.split("_");
 			$('#itemNo_'+id[1]).val(names[0]);
 			$('#itemName_'+id[1]).val(names[1]);
+			$('#itemAvailable_'+id[1]).val(names[2]);
 			$('#quantity_'+id[1]).val(1);
-			$('#price_'+id[1]).val(names[2]);
-			$('#total_'+id[1]).val( 1*names[2] );
+			$('#price_'+id[1]).val(names[3]);
+			$('#total_'+id[1]).val( 1*names[3] );
 			calculateTotal();
 		}		      	
 	});

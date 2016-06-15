@@ -63,7 +63,7 @@ if(isset($_POST['invoice']))
             <div class="col-xs-12">
               <div class="box">
                 <div align="center" class="box-header with-border">
-                  <h3 class="box-title">Smart Sell</h3>
+                  <h3 class="box-title">Indoor Sell</h3>
                 </div><!-- /.box-header -->
                 <form class="" method="post" action="" enctype="multipart/form-data">
 		      	<div class='box-body'>  

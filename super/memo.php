@@ -24,8 +24,11 @@ include("../connection.php");
 			      <tr>
 			        <th>S. No.</th>
 			        <th>Memo No.</th>
-			        <th>Edit</th>
+			        <th>New</th>
+			        <th>Return</th>
+			        <th>Update Price</th>
 			        <th>View</th>
+			        <th>Delete</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -42,8 +45,11 @@ include("../connection.php");
             	  <tr>
                     <td><?php echo $i ; ?></td>
 			        <td><?php echo $row['memo_no'] ; ?></td>
-			        <td><a href="memo_edit.php?memo_no=<?php echo $row['memo_no']; ?>"><button class="btn btn-primary">Edit</button></a></td>
+			        <td><a href="invoice_new.php?memo_no=<?php echo $row['memo_no']; ?>"><img src="../dist/img/plus.jpg"></a></td>
+			        <td><a href="invoice_return.php?memo_no=<?php echo $row['memo_no']; ?>"><img src="../dist/img/minus.jpg"></a></td>
+			        <td><a href="memo_edit.php?memo_no=<?php echo $row['memo_no']; ?>"><button class="btn btn-primary">Update</button></a></td>
 			        <td><a href="view_memo.php?memo_no=<?php echo $row['memo_no']; ?>"><img src="../dist/img/view.jpg"></a></td>
+			        <td><a href="delete_memo.php?memo_no=<?php echo $row['memo_no']; ?>"><button class="btn btn-xs btn-danger" type="button"><i class="glyphicon glyphicon-trash"></i> Delete</button></a></td>
 			      </tr>
 			      <?php 
 			      	}
