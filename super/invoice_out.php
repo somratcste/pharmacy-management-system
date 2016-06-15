@@ -7,44 +7,67 @@ if($_SESSION['name']!='www.somrat.info')
 }
 include("head.php"); 
 include("../connection.php");
+$memo_no = $_GET['memo_no'];
 
 if(isset($_POST['invoice']))
 {
   try {
 
 
-    $statement = $db->prepare("INSERT INTO memo_info (memo_no, m_date, customar_name, sex, age, doc_id) VALUES (?,?,?,?,?,?)");
-    $statement->execute(array($_POST['memo_no'],$_POST['m_date'],$_POST['customar_name'],$_POST['sex'],$_POST['age'],$_POST['doc_id']));
-
-
-    $statement = $db->prepare("INSERT INTO memo_price (memo_no, subtotal, percent, percent_amount, without_percent, discount_amount, total_paid , m_date) VALUES (?,?,?,?,?,?,?,?)");
-    $statement->execute(array($_POST['memo_no'],$_POST['subtotal'],$_POST['percent'],$_POST['percent_amount'],$_POST['without_percent'],$_POST['discount_amount'],$_POST['total_paid'],$_POST['m_date']));
-
-
-
-
     for($i=0;$i<count($_POST['itemNo']);$i++)
     {
 
-        $memo_no['memo_no']      = $_POST['memo_no'];
+  
         $itemNo['itemNo']      = $_POST['itemNo'][$i];
         $itemName['itemName']     = $_POST['itemName'][$i];
         $price['price']        = $_POST['price'][$i];
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
-        // echo $data['itemNo'] . " " .$data['itemName'] . " " . $data['price'] . " " . $data['quantity']. " " . $data['total'] ;
-       //your insert query here
-       $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total , m_date) VALUES (?,?,?,?,?,?,?)");
-       $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total'],$_POST['m_date']));
+
+        $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
+		$statement->execute(array($memo_no,$itemNo['itemNo']));
+		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		
+		foreach ($result as $row) {
+			$quantity = $row['item_quantity']-$quantity['quantity'];
+			$total 	  = $row['item_total']-$total['total'];
+			$memo_id  = $row['memo_id'];
+		
+		$statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
+		$statement1->execute(array($quantity,$total,$memo_id));
+
+		echo ("<SCRIPT LANGUAGE='JavaScript'>
+	    window.alert('Return New Item successfully')
+	    window.location.href='memo.php';
+	    </SCRIPT>");
+		
+		
+		}
+		
+		
+		$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
+        $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+		
+		
+		
+		
+
+		// $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		// 	foreach ($result as $row) {
+		// 	echo $row['post_title'];
+		// 		}
+
+
+       
      }
 
 
 
 
-    $success_message = "Memo Created successfully.";
+    $success_message = "Purchase New Item successfully.";
 
     echo ("<SCRIPT LANGUAGE='JavaScript'>
-    window.alert('Memo Created successfully')
+    window.alert('Purchase New Item successfully')
     window.location.href='memo.php';
     </SCRIPT>");
     
@@ -63,89 +86,10 @@ if(isset($_POST['invoice']))
             <div class="col-xs-12">
               <div class="box">
                 <div align="center" class="box-header with-border">
-                  <h3 class="box-title">Outdoor Sell</h3>
+                  <h3 class="box-title">Purchase New Item</h3>
                 </div><!-- /.box-header -->
                 <form class="" method="post" action="" enctype="multipart/form-data">
-		      	<div class='box-body'>  
-				  <div class="row col-md-6 pull-left">
-				  
-					<div class="form-group form-inline">
-						<label class="col-sm-4" >Memo No : &nbsp;</label>
-						<div class="input-group col-sm-6">
-							<input name="memo_no" type="number" class="form-control" placeholder="Memo No." >
-						</div>
-					</div>  
-					</div>  
-
-					<div class="row col-md-6 pull-right">
-					<div class="form-group form-inline">
-						<label class="col-sm-4" >Date : &nbsp;</label>
-						<div class="input-group col-sm-6">
-							<input name="m_date" type="date" class="form-control">
-						</div>
-					</div>  
-					</div>  
-
-					<div class="row col-md-6 pull-left">
-					<div class="form-group form-inline">
-						<label class="col-sm-4" >Customar Name : &nbsp;</label>
-						<div class="input-group col-sm-6">
-							<input name="customar_name" type="text" class="form-control" placeholder="customar name">
-						</div>
-					</div>  
-					</div>	
-
-					<div class="row col-md-6 pull-right">
-					<div class="form-group form-inline">
-						<label class="col-sm-4" >Sex : &nbsp;</label>
-						<div class="input-group col-sm-6">
-							<select name="sex" class="form-control" id="sel1">
-								<option value="">Select Sex</option>
-						        <option value="1">Male</option>
-						        <option value="0">Female</option>
-					      </select>
-						</div>
-					</div>  
-					</div>
-
-					<div class="row col-md-6 pull-left">
-					<div class="form-group form-inline">
-						<label class="col-sm-4" >Age : &nbsp;</label>
-						<div class="input-group col-sm-6">
-							<input name="age" type="number" class="form-control" placeholder="age">
-						</div>
-					</div>  
-					</div>
-
-					<div class="row col-md-6 pull-right">
-					<div class="form-group form-inline">
-						<label class="col-sm-4" >Ref. Doctor : &nbsp;</label>
-						<div class="input-group col-sm-6">
-		                <select class="form-control" name="doc_id">
-		                <option value="">Select A Doctor</option>
-		                <?php
-
-		                $statement = $db->prepare("SELECT * FROM doctors");
-		                $statement->execute();
-		                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-		                  foreach ($result as $row) { ?>
-
-
-		                    <option value="<?php echo $row['doc_id']; ?>"><?php echo $row['doc_name'] ; ?></option>
-
-		                    <?php
-		                  
-		                    }
-
-		                ?>
-		              </select>
-		              </div>
-					</div>  
-					</div>
-				 				  
-				 </div>
-
-				
+		
                 <div class="box-body">
                  <div class="table-responsive">  
                  
@@ -153,11 +97,12 @@ if(isset($_POST['invoice']))
                     <thead>
                         <tr>
 							<th width="2%"><input id="check_all" class="formcontrol" type="checkbox"/></th>
-							<th width="15%">Item ID</th>
-							<th width="38%">Item Name</th>
-							<th width="15%">Price</th>
-							<th width="15%">Quantity</th>
-							<th width="15%">Total</th>
+							<th width="13%">Item ID</th>
+							<th width="33%">Item Name</th>
+							<th width="13%">Available</th>
+							<th width="13%">Price</th>
+							<th width="13%">Quantity</th>
+							<th width="13%">Total</th>
 						</tr>
                     </thead>
 
@@ -166,6 +111,7 @@ if(isset($_POST['invoice']))
 							<td><input class="case" type="checkbox"/></td>
 							<td><input type="text" data-type="productCode" name="itemNo[]" id="itemNo_1" class="form-control autocomplete_txt" autocomplete="off"></td>
 							<td><input type="text" data-type="productName" name="itemName[]" id="itemName_1" class="form-control autocomplete_txt" autocomplete="off"></td>
+							<td><input type="text" data-type="productAvailable" name="itemAvailable[]" id="itemAvailable_1" class="form-control autocomplete_txt" autocomplete="off"></td>
 							<td><input type="number" name="price[]" id="price_1" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>
 							<td><input type="number" name="quantity[]" id="quantity_1" class="form-control changesNo" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>
 							<td><input type="number" name="total[]" id="total_1" class="form-control totalLinePrice" autocomplete="off" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;"></td>
@@ -180,50 +126,7 @@ if(isset($_POST['invoice']))
 
 				
 			<div class="row col-md-6 pull-right">
-			<div class="form-group form-inline">
-				<label class="col-sm-4" >Subtotal: &nbsp;</label>
-				<div class="input-group col-sm-6">
-					<div class="input-group-addon">Tk.</div>
-					<input name="subtotal" type="number" class="form-control" id="subTotal" placeholder="Subtotal" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-				</div>
-			</div>
-			<div class="form-group form-inline">
-				<label class="col-sm-4">Percent: &nbsp;</label>
-				<div class="input-group col-sm-6">
-					<div class="input-group-addon">Tk.</div>
-					<input name="percent" type="number" class="form-control" id="tax" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-       				<div class="input-group-addon">%</div>
-				</div>
-			</div>
-			<div class="form-group form-inline">
-				<label class="col-sm-4">Percent Amount: &nbsp;</label>
-				<div class="input-group col-sm-6">
-					<div class="input-group-addon">Tk.</div>
-					<input name="percent_amount" type="text" class="form-control" id="taxAmount" placeholder="Percent" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">					
-				</div>
-			</div>
-
-			<div class="form-group form-inline">
-				<label class="col-sm-4">Without Percent: &nbsp;</label>
-				<div class="input-group col-sm-6">
-					<div class="input-group-addon">Tk.</div>
-					<input name="without_percent" type="text" class="form-control" id="totalAftertax" placeholder="Without Percen" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-				</div>
-			</div>
-			<div class="form-group form-inline">
-				<label class="col-sm-4">Discount Amount: &nbsp;</label>
-				<div class="input-group col-sm-6">
-					<div class="input-group-addon">Tk.</div>
-					<input name="discount_amount" type="number" class="form-control" id="amountPaid" placeholder="Discount Amount" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-				</div>
-			</div>
-			<div class="form-group form-inline">
-				<label class="col-sm-4">Total : &nbsp;</label>
-				<div class="input-group col-sm-6">
-					<div class="input-group-addon">Tk.</div>
-					<input name="total_paid" type="number" class="form-control amountDue" id="amountDue" placeholder="Total" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
-				</div>
-			</div>
+			
 
           <div class="form-group">       	
 			<label class="col-sm-4"></label>	

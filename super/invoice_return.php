@@ -26,23 +26,38 @@ if(isset($_POST['invoice']))
 
         $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
 		$statement->execute(array($memo_no,$itemNo['itemNo']));
-		if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
 		
 		foreach ($result as $row) {
-			$quantity['quantity'] = $row['item_quantity']+$quantity['quantity'];
-			$total['total'] 	  = $row['item_total']+$total['total'];
+			$quantity = $row['item_quantity']+$quantity['quantity'];
+			$total 	  = $row['item_total']+$total['total'];
 			$memo_id  = $row['memo_id'];
 		
 		$statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
-		$statement1->execute(array($quantity['quantity'],$total['total'],$memo_id));
+		$statement1->execute(array($quantity,$total,$memo_id));
 
+		echo ("<SCRIPT LANGUAGE='JavaScript'>
+	    window.alert('Purchase New Item successfully')
+	    window.location.href='memo.php';
+	    </SCRIPT>");
+		
+		break;
 		}
-		}
-		else {
-
+		
+		
 		$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
         $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
-    	}
+		
+		
+		
+		
+
+		// $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+		// 	foreach ($result as $row) {
+		// 	echo $row['post_title'];
+		// 		}
+
+
        
      }
 
