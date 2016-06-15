@@ -25,49 +25,25 @@ if(isset($_POST['invoice']))
         $total['total']        = $_POST['total'][$i];
 
         $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
-		$statement->execute(array($memo_no,$itemNo['itemNo']));
-		$result = $statement->fetchAll(PDO::FETCH_ASSOC);
-		
-		foreach ($result as $row) {
-			$quantity = $row['item_quantity']+$quantity['quantity'];
-			$total 	  = $row['item_total']+$total['total'];
-			$memo_id  = $row['memo_id'];
-		
-		$statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
-		$statement1->execute(array($quantity,$total,$memo_id));
+  		  $statement->execute(array($memo_no,$itemNo['itemNo']));
+  		  if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+  		
+  		foreach ($result as $row) {
+  			$quantity['quantity'] = $row['item_quantity']-$quantity['quantity'];
+  			$total['total'] 	  = $row['item_total']-$total['total'];
+  			$memo_id  = $row['memo_id'];
+  		
+  		$statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
+  		$statement1->execute(array($quantity['quantity'],$total['total'],$memo_id));
 
-		echo ("<SCRIPT LANGUAGE='JavaScript'>
-	    window.alert('Purchase New Item successfully')
-	    window.location.href='memo.php';
-	    </SCRIPT>");
-		
-		break;
-		}
-		
-		
-		$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
-        $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
-		
-		
-		
-		
+  		  }
+      }
+   
+      }
 
-		// $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-		// 	foreach ($result as $row) {
-		// 	echo $row['post_title'];
-		// 		}
-
-
-       
-     }
-
-
-
-
-    $success_message = "Purchase New Item successfully.";
 
     echo ("<SCRIPT LANGUAGE='JavaScript'>
-    window.alert('Purchase New Item successfully')
+    window.alert('Return Item Inserted successfully')
     window.location.href='memo.php';
     </SCRIPT>");
     
@@ -86,7 +62,7 @@ if(isset($_POST['invoice']))
             <div class="col-xs-12">
               <div class="box">
                 <div align="center" class="box-header with-border">
-                  <h3 class="box-title">Purchase New Item</h3>
+                  <h3 class="box-title">Return An Item</h3>
                 </div><!-- /.box-header -->
                 <form class="" method="post" action="" enctype="multipart/form-data">
 		
