@@ -17,8 +17,8 @@ if(isset($_POST['invoice']))
     $statement->execute(array($_POST['memo_no'],$_POST['m_date'],$_POST['customar_name'],$_POST['sex'],$_POST['age'],$_POST['doc_id']));
 
 
-    $statement = $db->prepare("INSERT INTO memo_price (memo_no, subtotal, percent, percent_amount, without_percent, discount_amount, total_paid , m_date) VALUES (?,?,?,?,?,?,?,?)");
-    $statement->execute(array($_POST['memo_no'],$_POST['subtotal'],$_POST['percent'],$_POST['percent_amount'],$_POST['without_percent'],$_POST['discount_amount'],$_POST['total_paid'],$_POST['m_date']));
+    $statement = $db->prepare("INSERT INTO memo_price (memo_no, subtotal, percent, percent_amount, without_percent, discount_amount, total_paid ) VALUES (?,?,?,?,?,?,?)");
+    $statement->execute(array($_POST['memo_no'],$_POST['subtotal'],$_POST['percent'],$_POST['percent_amount'],$_POST['without_percent'],$_POST['discount_amount'],$_POST['total_paid']));
 
 
 
@@ -33,8 +33,8 @@ if(isset($_POST['invoice']))
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
 
-       $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total , m_date) VALUES (?,?,?,?,?,?,?)");
-       $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total'],$_POST['m_date']));
+       $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
+       $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
      }
 
 
@@ -54,6 +54,11 @@ if(isset($_POST['invoice']))
     $error_message = $e->getMessage();
   }
 }
+
+$statement = $db->prepare("SELECT `auto_increment` FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'memo_info'");
+$statement->execute(array());
+$memo_no = $statement->fetch()["auto_increment"];
+$memo_no+=1;
 ?>
 
 <div class="content-wrapper">
@@ -71,7 +76,7 @@ if(isset($_POST['invoice']))
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Memo No : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input name="memo_no" type="number" class="form-control" placeholder="Memo No." >
+							<input name="memo_no" type="number" class="form-control" value="<?php echo $memo_no ; ?>" >
 						</div>
 					</div>  
 					</div>  
@@ -99,9 +104,9 @@ if(isset($_POST['invoice']))
 						<label class="col-sm-4" >Sex : &nbsp;</label>
 						<div class="input-group col-sm-6">
 							<select name="sex" class="form-control" id="sel1">
-								<option value="">Select Sex</option>
+								<option value=" ">Select Sex</option>
 						        <option value="1">Male</option>
-						        <option value="0">Female</option>
+						        <option value="2">Female</option>
 					      </select>
 						</div>
 					</div>  

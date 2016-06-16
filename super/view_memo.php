@@ -24,7 +24,7 @@ foreach($result as $row)
  	$doc_id 		= $row['doc_id'];
  	if($sex==1)
  		$sex = "Male";
- 	else
+ 	else if ($sex==2)
  		$sex = "Female";
 }
 $doc_name = "";
