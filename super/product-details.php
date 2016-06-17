@@ -368,7 +368,7 @@ $company_name = $statement3->fetch()["com_name"];
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 
@@ -418,7 +418,7 @@ $company_name = $statement3->fetch()["com_name"];
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 
