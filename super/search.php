@@ -137,13 +137,13 @@ if(isset($_POST['search']))
 
                     <tbody>
 
-        <?php
-        $i=0;
-        $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? AND productCode = ?");
-        $statement->execute(array($com_id,$productCode));
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        foreach($result as $row)
-        {
+          <?php
+          $i=0;
+          $statement = $db->prepare("SELECT * FROM table_products WHERE com_id = ? AND productCode = ?");
+          $statement->execute(array($com_id,$productCode));
+          $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+          foreach($result as $row)
+          {
           $i++;
           ?>
 
@@ -448,7 +448,7 @@ if(isset($_POST['search']))
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 
@@ -498,7 +498,7 @@ if(isset($_POST['search']))
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
                                   </div>
                                 </div> 
 
