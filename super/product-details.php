@@ -42,6 +42,7 @@ $company_name = $statement3->fetch()["com_name"];
                       <tr>
                         <th>No.</th>
                         <th>Name</th>
+                        <th>Status</th>
                         <th>Store Box</th>
                         <th>Piece</th>
                         <th>Purchase P.</th>                        
@@ -69,6 +70,17 @@ $company_name = $statement3->fetch()["com_name"];
             <tr>
               <td><?php echo $i ; ?></td>
                   <td><?php echo $row['productName']; ?></td>
+                  <td>
+                    <?php
+                        $statement1 = $db->prepare("SELECT * FROM product_status WHERE status_id=?");
+                        $statement1->execute(array($row['status_id']));
+                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($result1 as $row1)
+                        {
+                          echo $row1['status_name'];
+                        }
+                      ?>
+                  </td>
                   <td>
                     <?php
                         $statement1 = $db->prepare("SELECT * FROM table_categories WHERE cat_id=?");
@@ -100,7 +112,18 @@ $company_name = $statement3->fetch()["com_name"];
                           <h4 class="modal-title" id="myModalLabel">View Product Details</h4>
                         </div>
                         <div class="modal-body">
-                        <p><b>M. Trade Name<span style="margin-left:3.8em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
+                        <p><b>Product Name<span style="margin-left:4em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
+                        <p><b>Selected Status <span style="margin-left:3.6em"></span> : </b>
+                        <?php
+                        $statement1 = $db->prepare("SELECT * FROM product_status WHERE status_id=?");
+                        $statement1->execute(array($row['status_id']));
+                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($result1 as $row1)
+                        {
+                          echo $row1['status_name'];
+                        }
+                        ?>
+                        </p>
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php
@@ -170,11 +193,41 @@ $company_name = $statement3->fetch()["com_name"];
           <form class="form-horizontal" action="message.php?peditid=<?php echo $row['productCode']; ?>" method="post" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">M. Trade Name</label>
+                <label for="inputEmail3" class="col-sm-4 control-label">Product Name</label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" id="inputEmail3" value="<?php echo $row['productName']; ?>" name="productName">
                 </div>
               </div>
+
+              <div class="form-group">
+              <label for="inputEmail3" class="col-sm-4 control-label">Select Status</label>
+              <div class="col-sm-6">
+                <select class="form-control" name="status_id">
+                <option value="">Select A Status</option>
+                <?php
+
+                $statement1 = $db->prepare("SELECT * FROM product_status");
+                $statement1->execute();
+                $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                foreach($result1 as $row1)
+                  {
+
+                    if($row1['status_id'] == $row['status_id'])
+                    {
+                      ?><option value="<?php echo $row1['status_id']; ?>" selected><?php echo $row1['status_name']; ?></option><?php
+                    }
+                    else
+                    {
+                      ?><option value="<?php echo $row1['status_id']; ?>"><?php echo $row1['status_name']; ?></option><?php
+                    }
+                      
+                    
+                    
+                  }
+                ?>
+              </select>
+              </div>
+            </div>
 
               <div class="form-group">
               <label for="inputEmail3" class="col-sm-4 control-label">Select Company</label>
@@ -315,7 +368,7 @@ $company_name = $statement3->fetch()["com_name"];
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
                                   </div>
                                 </div> 
 
@@ -365,12 +418,12 @@ $company_name = $statement3->fetch()["com_name"];
                                 <div class="form-group">
                                   <label for="inputEmail3" class="col-sm-4 control-label">Product Piece </label>
                                   <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="quantityInStock_entry">
+                                    <input type="text" class="form-control" id="inputEmail3" placeholder="0" name="p_peice_entry">
                                   </div>
                                 </div> 
 
                                 <div class="form-group">
-                                  <label for="inputEmail3" class="col-sm-4 control-label">Delivary Product</label>
+                                  <label for="inputEmail3" class="col-sm-4 control-label">Memo No.</label>
                                   <div class="col-sm-6">
                                     <input type="text" class="form-control" id="inputEmail3" placeholder="Memo No." name="dec_address">
                                   </div>
@@ -405,6 +458,7 @@ $company_name = $statement3->fetch()["com_name"];
            <tr>
               <th>No.</th>
               <th>Name</th>
+              <th>Status</th>
               <th>Store Box</th>
               <th>Piece</th>
               <th>Purchase P.</th>                        

@@ -49,6 +49,16 @@
 
       <li class="treeview">
         <a href="#">
+          <i class="fa fa-gg"></i> <span>Product Status</span>
+          <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="product_status.php"><i class="fa fa-circle-o"></i>Status</a></li>
+        </ul>
+      </li>
+
+      <li class="treeview">
+        <a href="#">
           <i class="fa fa-gg"></i> <span>Doctors</span>
           <i class="fa fa-angle-left pull-right"></i>
         </a>

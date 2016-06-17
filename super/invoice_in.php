@@ -58,7 +58,7 @@ if(isset($_POST['invoice']))
 $statement = $db->prepare("SELECT `auto_increment` FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'memo_info'");
 $statement->execute(array());
 $memo_no = $statement->fetch()["auto_increment"];
-$memo_no+=1;
+$memo_no+=100000;
 ?>
 
 <div class="content-wrapper">
@@ -76,7 +76,7 @@ $memo_no+=1;
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Memo No : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input name="memo_no" type="number" class="form-control" value="<?php echo $memo_no ; ?>" >
+							<input name="memo_no" type="number" class="form-control" value="<?php echo $memo_no ; ?>" required >
 						</div>
 					</div>  
 					</div>  
@@ -85,7 +85,7 @@ $memo_no+=1;
 					<div class="form-group form-inline">
 						<label class="col-sm-4" >Date : &nbsp;</label>
 						<div class="input-group col-sm-6">
-							<input name="m_date" type="date" class="form-control">
+							<input name="m_date" type="date" class="form-control" required>
 						</div>
 					</div>  
 					</div>  

@@ -120,14 +120,7 @@
               </li>
 
               <li class="dropdown user user-menu">
-                <a href="invoice_out.php" class="dropdown-toggle" > Sell Out
-                  <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
-                  <!-- <span class="user-image">Logout</span> -->
-                </a>
-              </li>
-
-              <li class="dropdown user user-menu">
-                <a href="invoice_in.php" class="dropdown-toggle" > Sell In
+                <a href="invoice_in.php" class="dropdown-toggle" > Sell
                   <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
                   <!-- <span class="user-image">Logout</span> -->
                 </a>

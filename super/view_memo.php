@@ -26,6 +26,10 @@ foreach($result as $row)
  		$sex = "Male";
  	else if ($sex==2)
  		$sex = "Female";
+  else {
+    $sex = "";
+    $age = "";
+  }
 }
 $doc_name = "";
 $statement = $db->prepare("SELECT * FROM doctors WHERE doc_id = ?");
