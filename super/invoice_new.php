@@ -24,7 +24,7 @@ if(isset($_POST['invoice']))
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
 
-        $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
+    $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
 		$statement->execute(array($memo_no,$itemNo['itemNo']));
 		if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
 		

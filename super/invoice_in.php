@@ -35,6 +35,25 @@ if(isset($_POST['invoice']))
 
        $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
        $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+
+        $statement = $db->prepare("SELECT * FROM table_products WHERE productCode = ?");
+		$statement->execute(array($itemNo['itemNo']));
+		if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+		
+		foreach ($result as $row) {
+			$row['quantityInStock'] = $row['quantityInStock']-$quantity['quantity'];
+		
+		$statement1 = $db->prepare("UPDATE table_products SET quantityInStock=? WHERE productCode = ?");
+		$statement1->execute(array($row['quantityInStock'],$itemNo['itemNo']));
+
+		}
+		}
+		else {
+
+		$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
+        $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+    	}
+
      }
 
 
