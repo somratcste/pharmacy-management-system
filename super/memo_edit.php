@@ -55,8 +55,7 @@ if(isset($_POST['invoice']))
         $price['price']        = $_POST['price'][$i];
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
-        // echo $data['itemNo'] . " " .$data['itemName'] . " " . $data['price'] . " " . $data['quantity']. " " . $data['total'] ;
-       //your insert query here
+
        $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
        $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
      }

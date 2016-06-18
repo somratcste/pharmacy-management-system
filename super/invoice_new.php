@@ -24,29 +24,44 @@ if(isset($_POST['invoice']))
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
 
-    $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
+    $statement = $db->prepare("SELECT memo_item.memo_id , memo_item.memo_no , memo_item.item_quantity, memo_item.item_total , table_products.quantityInStock , table_products.productCode FROM `memo_item` INNER JOIN `table_products` ON `memo_item`.memo_no = ? AND `memo_item`.item_id = ? AND `memo_item`.item_id = `table_products`.productCode");
 		$statement->execute(array($memo_no,$itemNo['itemNo']));
 		if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
 		
 		foreach ($result as $row) {
-			$quantity['quantity'] = $row['item_quantity']+$quantity['quantity'];
-			$total['total'] 	  = $row['item_total']+$total['total'];
+			$row['item_quantity'] = $row['item_quantity']+$quantity['quantity'];
+			$row['item_total'] 	  = $row['item_total']+$total['total'];
+      $row['quantityInStock'] = $row['quantityInStock']-$quantity['quantity'];
 			$memo_id  = $row['memo_id'];
-		
+
 		$statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
-		$statement1->execute(array($quantity['quantity'],$total['total'],$memo_id));
+		$statement1->execute(array($row['item_quantity'],$row['item_total'],$memo_id));
+
+    $statement2 = $db->prepare("UPDATE table_products SET quantityInStock=? WHERE productCode = ?");
+    $statement2->execute(array($row['quantityInStock'],$row['productCode']));
 
 		}
 		}
 		else {
 
-		$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
-        $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+    $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
+    $statement->execute(array($memo_no, $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+
+    $statement = $db->prepare("SELECT * FROM table_products WHERE productCode = ?");
+    $statement->execute(array($itemNo['itemNo']));
+    if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+    
+    foreach ($result as $row) {
+      $row['quantityInStock'] = $row['quantityInStock']-$quantity['quantity'];
+    
+    $statement1 = $db->prepare("UPDATE table_products SET quantityInStock=? WHERE productCode = ?");
+    $statement1->execute(array($row['quantityInStock'],$itemNo['itemNo']));
+
     	}
        
      }
 
-
+   }
 
 
     $success_message = "Purchase New Item successfully.";
@@ -57,6 +72,7 @@ if(isset($_POST['invoice']))
     </SCRIPT>");
     
   
+    }
   }
   
   catch(Exception $e) { 

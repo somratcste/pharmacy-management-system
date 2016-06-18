@@ -1,0 +1,1 @@
+SELECT memo_item.item_id , memo_item.memo_id , memo_item.memo_no , memo_item.item_quantity, memo_item.item_total , table_products.quantityInStock , table_products.productCode FROM `memo_item` INNER JOIN `table_products` ON `memo_item`.memo_no = 100046 AND `memo_item`.item_id = 847 AND `memo_item`.item_id = `table_products`.productCode

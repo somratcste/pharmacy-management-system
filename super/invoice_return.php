@@ -24,20 +24,24 @@ if(isset($_POST['invoice']))
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
 
-        $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? and item_id = ?");
-  		  $statement->execute(array($memo_no,$itemNo['itemNo']));
-  		  if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
-  		
-  		foreach ($result as $row) {
-  			$quantity['quantity'] = $row['item_quantity']-$quantity['quantity'];
-  			$total['total'] 	  = $row['item_total']-$total['total'];
-  			$memo_id  = $row['memo_id'];
-  		
-  		$statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
-  		$statement1->execute(array($quantity['quantity'],$total['total'],$memo_id));
+        $statement = $db->prepare("SELECT memo_item.memo_id , memo_item.memo_no , memo_item.item_quantity, memo_item.item_total , table_products.quantityInStock , table_products.productCode FROM `memo_item` INNER JOIN `table_products` ON `memo_item`.memo_no = ? AND `memo_item`.item_id = ? AND `memo_item`.item_id = `table_products`.productCode");
+        $statement->execute(array($memo_no,$itemNo['itemNo']));
+        if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+        
+        foreach ($result as $row) {
+          $row['item_quantity'] = $row['item_quantity']-$quantity['quantity'];
+          $row['item_total']    = $row['item_total']-$total['total'];
+          $row['quantityInStock'] = $row['quantityInStock']+$quantity['quantity'];
+          $memo_id  = $row['memo_id'];
 
-  		  }
-      }
+        $statement1 = $db->prepare("UPDATE memo_item SET item_quantity=?,item_total=? WHERE memo_id = ?");
+        $statement1->execute(array($row['item_quantity'],$row['item_total'],$memo_id));
+
+        $statement2 = $db->prepare("UPDATE table_products SET quantityInStock=? WHERE productCode = ?");
+        $statement2->execute(array($row['quantityInStock'],$row['productCode']));
+
+        }
+        }
    
       }
 

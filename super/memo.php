@@ -27,7 +27,7 @@ include("../connection.php");
 			        <th>New</th>
 			        <th>Return</th>
 			        <th>Update Price</th>
-			        <th>View</th>
+			        <th>Print</th>
 			        <th>Delete</th>
 			      </tr>
 			    </thead>
