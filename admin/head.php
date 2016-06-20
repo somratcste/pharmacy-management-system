@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HAQUE AGENCIES | Dashboard</title>
+    <title>TRUST ONE HOSPITAL | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/print.css" media="print">
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -102,9 +103,9 @@
         <!-- Logo -->
         <a href="admin.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>H </b>A</span>
+          <span class="logo-mini"><b>T </b>O</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>HAQUE </b>AGENCIES</span>
+          <span class="logo-lg"><b>TRUST </b>ONE</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -112,6 +113,25 @@
          
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav"> 
+
+              <li class="dropdown user user-menu">
+                <a href="memo.php" class="dropdown-toggle" > Memo
+                </a>
+              </li>
+
+              <li class="dropdown user user-menu">
+                <a href="invoice_in.php" class="dropdown-toggle" > Sell
+                  <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+                  <!-- <span class="user-image">Logout</span> -->
+                </a>
+              </li> 
+
+              <li class="dropdown user user-menu">
+                <a href="search.php" class="dropdown-toggle" > Search
+                  <!-- <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> -->
+                  <!-- <span class="user-image">Logout</span> -->
+                </a>
+              </li>
 
               <li class="dropdown user user-menu">
                 <a href="logout.php" class="dropdown-toggle" > Logout
@@ -128,7 +148,7 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="../dist/img/somrat.jpg" class="img-circle" alt="User Image">
                     <p>
                       Nazmul Hossain || Software Eng.
                       <small>Hello : 01823387518</small>
