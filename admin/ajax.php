@@ -1,13 +1,13 @@
 <?php
 /*
-Site : http:www.somrat.info
-Author :Somrat
+Site : http:www.smarttutorials.net
+Author :muni
 */
 include ("../connection.php");
 if(!empty($_POST['type'])){
 	$type = $_POST['type'];
 	$name = $_POST['name_startsWith'];
-	$statement = $db->prepare("SELECT productCode, productName, sellPrice , quantityInStock FROM table_products where quantityInStock !=0 and UPPER($type) LIKE '".strtoupper($name)."%' limit 10");
+	$statement = $db->prepare("SELECT productCode, productName, sellPrice , quantityInStock FROM table_products where quantityInStock !=0 and UPPER($type) LIKE '".strtoupper($name)."%'");
 	$statement->execute(array());
 	$data = array();
 	$result = $statement->fetchAll(PDO::FETCH_ASSOC);

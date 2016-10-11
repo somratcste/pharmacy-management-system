@@ -239,8 +239,8 @@ if(isset($_POST['form_edit'])) {
     }
 
             
-      $statement = $db->prepare("UPDATE table_products SET productName=?, com_id=?, cat_id=?,  quantityInStock = ? , buyPrice = ? , sellPrice = ? , e_date = ? , status_id = ? WHERE productCode =? ");
-      $statement->execute(array($_POST['productName'],$_POST['com_id'],$_POST['cat_id'],$_POST['quantityInStock'],$_POST['buyPrice'],$_POST['sellPrice'],$_POST['e_date'],$_POST['status_id'],$id));
+      $statement = $db->prepare("UPDATE table_products SET productName=?, com_id=?, cat_id=?,  quantityInStock = ? , buyPrice = ? , sellPrice = ? , e_date = ?  WHERE productCode =? ");
+      $statement->execute(array($_POST['productName'],$_POST['com_id'],$_POST['cat_id'],$_POST['quantityInStock'],$_POST['buyPrice'],$_POST['sellPrice'],$_POST['e_date'],$id));
 
      
     $success_message = "Product has been updated successfully.";
@@ -316,7 +316,7 @@ if(isset($_POST['form_edit'])) {
               </div>
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">Select Status</label>
               <div class="col-sm-6">
                 <select class="form-control" name="status_id">
@@ -338,7 +338,7 @@ if(isset($_POST['form_edit'])) {
                 ?>
               </select>
               </div>
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label for="inputEmail3" class="col-sm-3 control-label">Select Store Box</label>
@@ -420,7 +420,7 @@ if(isset($_POST['form_edit'])) {
                       <tr>
                         <th>No.</th>
                         <th>Name</th>
-                        <th>Status</th>
+<!--                         <th>Status</th> -->
                         <th>Store Box</th>
                         <th>Piece</th>
                         <th>Purchase P.</th>                        
@@ -448,17 +448,17 @@ if(isset($_POST['form_edit'])) {
             <tr>
               <td><?php echo $i ; ?></td>
                   <td><?php echo $row['productName']; ?></td>
-                  <td>
-                    <?php
-                        $statement1 = $db->prepare("SELECT * FROM product_status WHERE status_id=?");
-                        $statement1->execute(array($row['status_id']));
-                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
-                        foreach($result1 as $row1)
-                        {
-                          echo $row1['status_name'];
-                        }
-                      ?>
-                  </td>
+                   <!-- <td>
+                     <?php
+                  //       $statement1 = $db->prepare("SELECT * FROM product_status WHERE status_id=?");
+                  //       $statement1->execute(array($row['status_id']));
+                  //       $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                  //       foreach($result1 as $row1)
+                  //       {
+                  //         echo $row1['status_name'];
+                  //       }
+                  //     ?>
+                  <!-- </td>-->
                   <td>
                     <?php
                         $statement1 = $db->prepare("SELECT * FROM table_categories WHERE cat_id=?");
@@ -491,17 +491,17 @@ if(isset($_POST['form_edit'])) {
                         </div>
                         <div class="modal-body">
                         <p><b>Product Name<span style="margin-left:4em"></span> :</b> <?php echo $row['productName'] ; ?> </p>
-                        <p><b>Selected Status <span style="margin-left:3.6em"></span> : </b>
-                        <?php
-                        $statement1 = $db->prepare("SELECT * FROM product_status WHERE status_id=?");
-                        $statement1->execute(array($row['status_id']));
-                        $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
-                        foreach($result1 as $row1)
-                        {
-                          echo $row1['status_name'];
-                        }
-                        ?>
-                        </p>
+                        <!--<p><b>Selected Status <span style="margin-left:3.6em"></span> : </b>
+                         <?php
+                        // $statement1 = $db->prepare("SELECT * FROM product_status WHERE status_id=?");
+                        // $statement1->execute(array($row['status_id']));
+                        // $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+                        // foreach($result1 as $row1)
+                        // {
+                        //   echo $row1['status_name'];
+                        // }
+                        // ?>
+                        <!--</p>-->
 
                         <p><b>Selected Company <span style="margin-left:2em"></span> : </b>
                         <?php
@@ -577,35 +577,35 @@ if(isset($_POST['form_edit'])) {
                 </div>
               </div>
 
-              <div class="form-group">
+            <!--  <div class="form-group">
               <label for="inputEmail3" class="col-sm-4 control-label">Select Status</label>
               <div class="col-sm-6">
                 <select class="form-control" name="status_id">
                 <option value="">Select A Status</option>
-                <?php
+                 <?php
 
-                $statement1 = $db->prepare("SELECT * FROM product_status");
-                $statement1->execute();
-                $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
-                foreach($result1 as $row1)
-                  {
+            //     $statement1 = $db->prepare("SELECT * FROM product_status");
+            //     $statement1->execute();
+            //     $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
+            //     foreach($result1 as $row1)
+            //       {
 
-                    if($row1['status_id'] == $row['status_id'])
-                    {
-                      ?><option value="<?php echo $row1['status_id']; ?>" selected><?php echo $row1['status_name']; ?></option><?php
-                    }
-                    else
-                    {
-                      ?><option value="<?php echo $row1['status_id']; ?>"><?php echo $row1['status_name']; ?></option><?php
-                    }
+            //         if($row1['status_id'] == $row['status_id'])
+            //         {
+            //           ?><option value="<?php echo $row1['status_id']; ?>" selected><?php echo $row1['status_name']; ?></option><?php
+            //         }
+            //         else
+            //         {
+            //           ?><option value="<?php echo $row1['status_id']; ?>"><?php echo $row1['status_name']; ?></option><?php
+            //         }
                       
                     
                     
-                  }
-                ?>
-              </select>
+            //       }
+            //     ?>
+            <!--  </select>
               </div>
-            </div>
+            </div> -->
 
               <div class="form-group">
               <label for="inputEmail3" class="col-sm-4 control-label">Select Company</label>
@@ -836,7 +836,7 @@ if(isset($_POST['form_edit'])) {
            <tr>
             <th>No.</th>
             <th>Name</th>
-            <th>Status</th>
+<!--             <th>Status</th> -->
             <th>Store Box</th>
             <th>Price</th>
             <th>Action</th>

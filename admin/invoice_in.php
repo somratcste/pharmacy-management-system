@@ -80,8 +80,6 @@ $memo_no = $statement->fetch()["auto_increment"];
 $memo_no+=100000;
 ?>
 
-
-
 <div class="content-wrapper">
   <section class="content">
 	<div class="row">

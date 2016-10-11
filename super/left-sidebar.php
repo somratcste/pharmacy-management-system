@@ -4,7 +4,7 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="../dist/img/somrat.jpg" class="img-circle" alt="User Image">
+        <img src="../dist/img/avatar.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
         <p>Trust One Hospital</p>
