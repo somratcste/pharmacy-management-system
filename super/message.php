@@ -238,8 +238,8 @@ if(isset($_POST['form_edit'])) {
     }
 
             
-      $statement = $db->prepare("UPDATE table_products SET productName=?, com_id=?, cat_id=?,  quantityInStock = ? , buyPrice = ? , sellPrice = ? , e_date = ? , status_id = ? WHERE productCode =? ");
-      $statement->execute(array($_POST['productName'],$_POST['com_id'],$_POST['cat_id'],$_POST['quantityInStock'],$_POST['buyPrice'],$_POST['sellPrice'],$_POST['e_date'],$_POST['status_id'],$id));
+      $statement = $db->prepare("UPDATE table_products SET productName=?, com_id=?, cat_id=?,  quantityInStock = ? , buyPrice = ? , sellPrice = ? , e_date = ? WHERE productCode =? ");
+      $statement->execute(array($_POST['productName'],$_POST['com_id'],$_POST['cat_id'],$_POST['quantityInStock'],$_POST['buyPrice'],$_POST['sellPrice'],$_POST['e_date'],$id));
 
      
     $success_message = "Product has been updated successfully.";

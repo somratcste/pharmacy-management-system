@@ -142,8 +142,6 @@ $company_name = $statement3->fetch()["com_name"];
                   <!--End product view Modal -->
                    
 
-                  <!-- <td><a href="product-edit.php?id=<?php //echo $row['productCode']; ?>" ><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></a></td> -->
-
                   <td><button class="btn btn-primary" data-toggle="modal" data-target="#editModal<?php echo $i ; ?>">Edit</button></td>
 <!--product edit modal -->
 <div class="modal fade" id="editModal<?php echo $i; ?>" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
