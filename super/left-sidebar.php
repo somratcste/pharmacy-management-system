@@ -7,7 +7,7 @@
         <img src="../dist/img/avatar.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Trust One Hospital</p>
+        <p>Central Hospital</p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>

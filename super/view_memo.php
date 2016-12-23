@@ -55,48 +55,47 @@ foreach($result as $row)
         
  			  <div class="table-responsive">  
                  
-                  <table id="invoice_bill" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                        	<th>Memo No.</th>
+          <table id="invoice_bill" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+            	<th>Memo No.</th>
 							<th width="">Customar Name</th>
 							<th width="">Sex</th>
 							<th>Age</th>
 							<th width="">Ref. Dr.</th>
 							<th width="">Date</th>
 						</tr>
-                    </thead>
+          </thead>
 
-                    <tbody>
-                    	
-	            	  <tr>
-	            	  	<td><?php echo $memo_no ; ?></td>
+          <tbody>        	
+          	  <tr>
+          	  	<td><?php echo $memo_no ; ?></td>
 				        <td><?php echo $customar_name ; ?></td>
 				        <td><?php echo $sex ; ?></td>
 				        <td><?php echo $age ; ?></td>
 				        <td><?php echo $doc_name ; ?></td>
 				        <td><?php echo $m_date; ?></td>
 				      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            </tbody>
+          </table>
+        </div>
 				  
 				 				  
 				 
-                 <div class="table-responsive">  
-                 
-                  <table id="invoice_bill" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
+     <div class="table-responsive">  
+     
+      <table id="invoice_bill" class="table table-bordered table-hover">
+        <thead>
+            <tr>
 							<th width="15%">Item No.</th>
 							<th width="38%">Item Name</th>
 							<th width="15%">Price</th>
 							<th width="15%">Quantity</th>
 							<th width="8%">Total</th>
 						</tr>
-                    </thead>
+            </thead>
 
-                    <tbody>
+            <tbody>
                 <?php
 				        $i=0;
 				        $statement = $db->prepare("SELECT * FROM memo_item WHERE memo_no = ? ");
@@ -117,9 +116,9 @@ foreach($result as $row)
 				      <?php 
 				      	}
 				      ?>
-                    </tbody>
-                  </table>
-                </div>
+            </tbody>
+          </table>
+        </div>
             	
 			<div class="row col-md-4 pull-right">
 				<table id="invoice_bill" class="table table-bordered table-hover">

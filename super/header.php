@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TRUST ONE HOSPITAL | Dashboard</title>
+    <title>CENTRAL HOSPITAL | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -95,9 +95,9 @@
         <!-- Logo -->
         <a href="admin.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>T </b>O</span>
+          <span class="logo-mini"><b>C </b>H</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>TRUST </b>ONE</span>
+          <span class="logo-lg"><b>CENTRAL</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
