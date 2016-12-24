@@ -202,10 +202,10 @@ if(isset($_POST['invoice']))
                     </tbody>
                   </table>
                 </div>
-             <div class='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+             <!-- <div class='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
             <button class="btn btn-danger delete" type="button">- Delete</button>
             <button class="btn btn-success addmore" type="button">+ Add More</button>
-          </div>
+          </div> -->
 
         
       <div class="row col-md-6 pull-right">

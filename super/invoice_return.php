@@ -13,6 +13,10 @@ if(isset($_POST['invoice']))
 {
   try {
 
+    $p_date = date('Y-m-d');
+    $p_year = substr($p_date,0,4);
+    $p_month = substr($p_date,5,2);
+    $p_day = substr($p_date,8,2);
 
     for($i=0;$i<count($_POST['itemNo']);$i++)
     {
@@ -24,9 +28,13 @@ if(isset($_POST['invoice']))
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
 
+
         $statement = $db->prepare("SELECT memo_item.memo_id , memo_item.memo_no , memo_item.item_quantity, memo_item.item_total , table_products.quantityInStock , table_products.productCode FROM `memo_item` INNER JOIN `table_products` ON `memo_item`.memo_no = ? AND `memo_item`.item_id = ? AND `memo_item`.item_id = `table_products`.productCode");
         $statement->execute(array($memo_no,$itemNo['itemNo']));
         if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
+
+        $statement = $db->prepare("INSERT INTO product_decrement (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");    
+        $statement->execute(array($quantity['quantity'],$itemNo['itemNo'],$p_date,$memo_no,$p_day,$p_month,$p_year));
         
         foreach ($result as $row) {
           $row['item_quantity'] = $row['item_quantity']-$quantity['quantity'];

@@ -12,6 +12,10 @@ if(isset($_POST['invoice']))
 {
   try {
 
+  	$p_date = date('Y-m-d');
+    $p_year = substr($p_date,0,4);
+    $p_month = substr($p_date,5,2);
+    $p_day = substr($p_date,8,2);
 
     $statement = $db->prepare("INSERT INTO memo_info (memo_no, m_date, customar_name, sex, age, doc_id) VALUES (?,?,?,?,?,?)");
     $statement->execute(array($_POST['memo_no'],$_POST['m_date'],$_POST['customar_name'],$_POST['sex'],$_POST['age'],$_POST['doc_id']));
@@ -33,8 +37,11 @@ if(isset($_POST['invoice']))
         $quantity['quantity']     = $_POST['quantity'][$i];
         $total['total']        = $_POST['total'][$i];
 
-       $statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
-       $statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+       	$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
+       	$statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
+
+       	$statement = $db->prepare("INSERT INTO product_increment (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
+    	$statement->execute(array($quantity['quantity'],$itemNo['itemNo'],$p_date,$memo_no['memo_no'],$p_day,$p_month,$p_year));
 
         $statement = $db->prepare("SELECT * FROM table_products WHERE productCode = ?");
 		$statement->execute(array($itemNo['itemNo']));
