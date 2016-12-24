@@ -24,8 +24,7 @@ if(isset($_POST['p_year']) & isset($_POST['p_month'])) {
 	  <div class="box box-info">
 	      <div class="box-header with-border">
 	        <h3 class="box-title">Monthly Entry Product</h3>
-	      </div><!-- /.box-header -->
-	      
+	      </div><!-- /.box-header -->	      
 	  </div><!-- /.box -->
 	</div>
 
@@ -55,15 +54,12 @@ if(isset($_POST['p_year']) & isset($_POST['p_month'])) {
           <table id="example2" class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Date(Y-M-D)</th>
-                <th>Company</th>
-                <th>Size</th>
-                <th>Carton</th>
-                <th>Piece</th>
-                <th>Entry Address</th>
-              </tr>
+        <th>No.</th>
+        <th>Date(Y-M-D)</th>
+        <th>Piece</th>
+        <th>Purchase Price</th>
+        <th>Memo No.</th>
+      </tr>
             </thead>
 
             <tbody>
@@ -82,13 +78,12 @@ if(isset($_POST['p_year']) & isset($_POST['p_month'])) {
                     <tr>
                         <td><?php echo $i ; ?></td>
                         <?php 
-                        $statement1 = $db->prepare("SELECT p_name , com_id , size_id FROM table_products WHERE p_id = ?");
+                        $statement1 = $db->prepare("SELECT * FROM table_products WHERE productCode = ?");
                         $statement1->execute(array($row['p_id']));
                         $result1 = $statement1->fetchAll(PDO::FETCH_ASSOC);
                         foreach($result1 as $row1) {
-                            $product_name = $row1['p_name'];
+                            $product_name = $row1['productName'];
                             $com_id = $row1['com_id'];
-                            $size_id = $row1['size_id'];
                             
                         ?>
                         
@@ -100,19 +95,11 @@ if(isset($_POST['p_year']) & isset($_POST['p_month'])) {
 						$company_name = $statement2->fetch()["com_name"];
 						?>
 						<td><?php echo $company_name; ?></td>
-						<?php
-                        $statement3 = $db->prepare("SELECT size_name FROM table_sizes WHERE size_id = ?");
-						$statement3->execute(array($size_id));
-						$size_name = $statement3->fetch()["size_name"];
-						?>
-						<td><?php echo $size_name; ?></td>
+
 						<?php
                         }
                         ?>
-
-                        <td><?php echo $row['p_cartoon']; ?></td>
-                        <td><?php echo $row['p_peice']; ?></td>
-                        <td><?php echo $row['inc_address']; ?></td>
+                        <td><?php echo $row['memo_no']; ?></td>
                     </tr>
                 <?php 
                 }
@@ -122,13 +109,10 @@ if(isset($_POST['p_year']) & isset($_POST['p_month'])) {
 	<tfoot>
 	   <tr>
         <th>No.</th>
-        <th>Name</th>
         <th>Date(Y-M-D)</th>
-        <th>Company</th>
-        <th>Size</th>
-        <th>Carton</th>
         <th>Piece</th>
-        <th>Entry Address</th>
+        <th>Purchase Price</th>
+        <th>Memo No.</th>
       </tr>
 	</tfoot>
 	</table>
