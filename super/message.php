@@ -113,7 +113,7 @@ if(isset($_POST['form_product_increment'])) {
     $p_day = substr($p_date,8,2);
 
 
-    $statement = $db->prepare("INSERT INTO product_increment (quantityInStock,productCode,p_date,inc_address,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
+    $statement = $db->prepare("INSERT INTO product_increment (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
     
     $statement->execute(array($_POST['quantityInStock_entry'],$id,$p_date,$inc_address,$p_day,$p_month,$p_year));
     $success_message = "Product Increment has been successfully added.";
@@ -167,7 +167,7 @@ if(isset($_POST['form_product_decrement'])) {
     $p_day = substr($p_date,8,2);
 
 
-    $statement = $db->prepare("INSERT INTO product_decrement (quantityInStock,productCode,p_date,dec_address,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
+    $statement = $db->prepare("INSERT INTO product_decrement (p_peice,p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
     
     $statement->execute(array($_POST['quantityInStock_entry'],$id,$p_date,$dec_address,$p_day,$p_month,$p_year));
     $success_message = "Product Decrement has been successfully Removed.";

@@ -211,7 +211,7 @@ $memo_no+=100000;
 				<label class="col-sm-4" >Subtotal: &nbsp;</label>
 				<div class="input-group col-sm-6">
 					<div class="input-group-addon">Tk.</div>
-					<input name="subtotal" type="number" class="form-control" id="subTotal" placeholder="Subtotal" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;">
+					<input name="subtotal" type="number" class="form-control" id="subTotal" placeholder="Subtotal" onkeypress="return IsNumeric(event);" ondrop="return false;" onpaste="return false;" readonly>
 				</div>
 			</div>
 			<div class="form-group form-inline">
