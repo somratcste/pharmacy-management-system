@@ -33,7 +33,7 @@ if(isset($_POST['invoice']))
         $statement->execute(array($memo_no,$itemNo['itemNo']));
         if($result = $statement->fetchAll(PDO::FETCH_ASSOC)){
 
-        $statement = $db->prepare("INSERT INTO product_decrement (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");    
+        $statement = $db->prepare("INSERT INTO product_increment (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");    
         $statement->execute(array($quantity['quantity'],$itemNo['itemNo'],$p_date,$memo_no,$p_day,$p_month,$p_year));
         
         foreach ($result as $row) {

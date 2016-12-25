@@ -28,7 +28,7 @@ if(isset($_POST['invoice']))
       $quantity['quantity']     = $_POST['quantity'][$i];
       $total['total']        = $_POST['total'][$i];
 
-    $statement = $db->prepare("INSERT INTO product_increment (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)"); 
+    $statement = $db->prepare("INSERT INTO product_decrement (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)"); 
     $statement->execute(array($quantity['quantity'],$itemNo['itemNo'],$p_date,$memo_no,$p_day,$p_month,$p_year));
 
     $statement = $db->prepare("SELECT memo_item.memo_id , memo_item.memo_no , memo_item.item_quantity, memo_item.item_total , table_products.quantityInStock , table_products.productCode FROM `memo_item` INNER JOIN `table_products` ON `memo_item`.memo_no = ? AND `memo_item`.item_id = ? AND `memo_item`.item_id = `table_products`.productCode");

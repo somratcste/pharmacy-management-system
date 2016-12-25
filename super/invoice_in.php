@@ -40,7 +40,7 @@ if(isset($_POST['invoice']))
        	$statement = $db->prepare("INSERT INTO memo_item (memo_no, item_id, item_name, item_price, item_quantity, item_total ) VALUES (?,?,?,?,?,?)");
        	$statement->execute(array($memo_no['memo_no'], $itemNo['itemNo'], $itemName['itemName'], $price['price'], $quantity['quantity'], $total['total']));
 
-       	$statement = $db->prepare("INSERT INTO product_increment (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
+       	$statement = $db->prepare("INSERT INTO product_decrement (p_peice,  p_id,p_date,memo_no,p_day,p_month,p_year) VALUES (?,?,?,?,?,?,?)");
     	$statement->execute(array($quantity['quantity'],$itemNo['itemNo'],$p_date,$memo_no['memo_no'],$p_day,$p_month,$p_year));
 
         $statement = $db->prepare("SELECT * FROM table_products WHERE productCode = ?");
